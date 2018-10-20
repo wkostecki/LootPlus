@@ -1,0 +1,47 @@
+﻿<!DOCTYPE hmtl>
+<html lang="en">
+<!--<link rel="stylesheet" type="text/css" href="helloworld.css" /> -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lootbox Clicker</title>
+    <!-- bind interval function -->
+    <script type="text/javascript" src="./scripts/main.js"></script>
+
+    <!-- libraries and "libraries" -->
+    <script type="text/javascript" src="./scripts/base_js_additions.js"></script>
+    <script type="text/javascript" src="./scripts/htmlInteraction.js"></script>
+
+    <!-- main showrunners -->
+    <script type="text/javascript" src="./scripts/lootbox.js"></script>
+    <script type="text/javascript" src="./scripts/buttons.js"></script>
+
+    <!-- BUILDINGS -->
+    <script type="text/javascript" src="./scripts/business.js"></script>
+    <script type="text/javascript" src="./scripts/pirate.js"></script>
+</head>
+
+<body>
+    <span id="lbps"></span><br />
+    <span id="lootboxCount"></span><br />
+    <span id="junkCount"></span><br />
+    <span id="commonCount"></span><br />
+    <span id="uncommonCount"></span><br />
+    <span id="rareCount"></span><br />
+    <span id="superRareCount"></span><br />
+    <span id="ultraRareCount"></span><br />
+    <span id="uberRareCount"></span><br />
+
+    <button class="home_button" id="open" onclick="lootbox.open();" style="visibility:hidden">Open a lootbox</button>
+    <form>
+        <input type="checkbox" name="open_all_checkbox" value="open_all_checkbox" id="open_all_checkbox"><label for="open_all_checkbox">Open All</label>
+    </form>
+    <br />
+    <br />
+    <button class="home_button" id="business" onclick="business.buy();" style="visibility:hidden"></button>
+    <br />
+    <button class="home_button" id="pirate" onclick="pirate.buy();" style="visibility:hidden"></button>
+
+</body>
+
+</html>
