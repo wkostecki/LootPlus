@@ -28,12 +28,9 @@ var lootbox = {
 
     },
     
-    open: function () {
-        var totalOpens = 1;
-        if (htmlInteraction.getElement("open_all_checkbox").checked)
-            totalOpens = this.numberOwned;
+    open: function (opens) {
         
-        for (var i = 0; i < totalOpens; i++)
+        for (var i = 0; i < opens; i++)
         {
             if (this.numberOwned >= 1) {
 
@@ -108,6 +105,7 @@ var lootbox = {
         this.UpdateText();
         buttons.checkLootbox();
         buttons.checkPurchaseableBuildings();
+        buttons.checkAutoOpen();
     },
 
     UpdateText: function () {

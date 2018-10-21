@@ -1,8 +1,8 @@
-var pirate = {
+var farm = {
 
     cost: 100,
-    purchaseType: "common",
-    lbps: 2,
+    purchaseType: "rare",
+    lbps: 10,
     totalOwned: 0,
     initialCost: 100,
     costIncPer: 1.18,
@@ -13,8 +13,8 @@ var pirate = {
     },
 
     buy: function () {
-        if (lootbox.common >= this.cost) {
-            lootbox.common -= this.cost;
+        if (lootbox.rare >= this.cost) {
+            lootbox.rare -= this.cost;
             this.totalOwned += 1;
             lootbox.boxesPerSecond += this.lbps;
             this.cost = Math.floor(this.initialCost * (Math.pow(this.costIncPer, this.totalOwned)));

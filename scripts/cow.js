@@ -1,8 +1,8 @@
-var pirate = {
+var cow = {
 
     cost: 100,
-    purchaseType: "common",
-    lbps: 2,
+    purchaseType: "uncommon",
+    lbps: 5,
     totalOwned: 0,
     initialCost: 100,
     costIncPer: 1.18,
@@ -13,8 +13,8 @@ var pirate = {
     },
 
     buy: function () {
-        if (lootbox.common >= this.cost) {
-            lootbox.common -= this.cost;
+        if (lootbox.uncommon >= this.cost) {
+            lootbox.uncommon -= this.cost;
             this.totalOwned += 1;
             lootbox.boxesPerSecond += this.lbps;
             this.cost = Math.floor(this.initialCost * (Math.pow(this.costIncPer, this.totalOwned)));

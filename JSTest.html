@@ -19,6 +19,11 @@
     <!-- BUILDINGS -->
     <script type="text/javascript" src="./scripts/business.js"></script>
     <script type="text/javascript" src="./scripts/pirate.js"></script>
+    <script type="text/javascript" src="./scripts/cow.js"></script>
+    <script type="text/javascript" src="./scripts/farm.js"></script>
+    <script type="text/javascript" src="./scripts/marketer.js"></script>
+    <script type="text/javascript" src="./scripts/eldergod.js"></script>
+
 </head>
 
 <body>
@@ -32,16 +37,29 @@
     <span id="ultraRareCount"></span><br />
     <span id="uberRareCount"></span><br />
 
-    <button class="home_button" id="open" onclick="lootbox.open();" style="visibility:hidden">Open a lootbox</button>
+    <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
     <form>
-        <input type="checkbox" name="open_all_checkbox" value="open_all_checkbox" id="open_all_checkbox"><label for="open_all_checkbox">Open All</label>
+        <input type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox" style="visibility:hidden"><label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
     </form>
     <br />
     <br />
     <button class="home_button" id="business" onclick="business.buy();" style="visibility:hidden"></button>
+    <span id="businessblurb" style="visibility:hidden"></span>
     <br />
     <button class="home_button" id="pirate" onclick="pirate.buy();" style="visibility:hidden"></button>
-
+    <span id="pirateblurb" style="visibility:hidden"></span>
+    <br />
+    <button class="home_button" id="cow" onclick="cow.buy();" style="visibility:hidden"></button>
+    <span id="cowblurb" style="visibility:hidden"></span>
+    <br />
+    <button class="home_button" id="farm" onclick="farm.buy();" style="visibility:hidden"></button>
+    <span id="farmblurb" style="visibility:hidden"></span>
+    <br />
+    <button class="home_button" id="marketer" onclick="marketer.buy();" style="visibility:hidden"></button>
+    <span id="marketerblurb" style="visibility:hidden"></span>
+    <br />
+    <button class="home_button" id="eldergod" onclick="eldergod.buy();" style="visibility:hidden"></button>
+    <span id="eldergodblurb" style="visibility:hidden"></span>
 </body>
 
 </html>
