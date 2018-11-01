@@ -30,6 +30,9 @@ var lootbox = {
     
     open: function (opens) {
         
+        if (opens > this.numberOwned)
+            opens = this.numberOwned;
+            
         for (var i = 0; i < opens; i++)
         {
             if (this.numberOwned >= 1) {
@@ -102,6 +105,7 @@ var lootbox = {
     
     Increase : function(value){
         this.numberOwned += value;
+        this.totalNumberOwned += value;
         this.UpdateText();
         buttons.checkLootbox();
         buttons.checkPurchaseableBuildings();

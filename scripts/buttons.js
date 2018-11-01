@@ -42,7 +42,7 @@ var buttons = {
     },
 
     checkAutoOpen: function () {
-        if (lootbox.lbps >= 5)
+        if (lootbox.boxesPerSecond >= 5)
         {
             htmlInteraction.setElementVisibility("auto_open_checkbox", true);
             htmlInteraction.setElementVisibility("auto_open_checkbox_label", true);
