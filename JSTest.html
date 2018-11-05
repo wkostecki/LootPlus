@@ -12,6 +12,9 @@
     <!-- libraries and "libraries" -->
     <script type="text/javascript" src="./scripts/base_js_additions.js"></script>
     <script type="text/javascript" src="./scripts/htmlInteraction.js"></script>
+    <script type="text/javascript" src="./scripts/p5/p5.js"></script>
+    <script type="text/javascript" src="./scripts/p5/p5.dom.js"></script>
+    <script type="text/javascript" src="./scripts/p5/p5.play.js"></script>
 
     <!-- main showrunners -->
     <script type="text/javascript" src="./scripts/lootbox.js"></script>
@@ -24,6 +27,9 @@
     <script type="text/javascript" src="./scripts/farm.js"></script>
     <script type="text/javascript" src="./scripts/marketer.js"></script>
     <script type="text/javascript" src="./scripts/eldergod.js"></script>
+
+    <!--adventures-->
+    <script type="text/javascript" src="./scripts/adventure.js"></script>
 
 </head>
 
@@ -40,7 +46,9 @@
 
     <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
     <form>
-        <input type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox" style="visibility:hidden"><label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
+        <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" 
+                id="auto_open_checkbox" style="visibility:hidden">
+            <label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
     </form>
     <br />
     <br />
@@ -61,6 +69,8 @@
     <br />
     <button class="home_button" id="eldergod" onclick="eldergod.buy();" style="visibility:hidden"></button>
     <span id="eldergodblurb" style="visibility:hidden"></span>
+
+    <div class="home_button" id="adventure_canvas"></div>
 </body>
 
 </html>

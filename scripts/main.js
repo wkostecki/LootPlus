@@ -14,7 +14,7 @@ var main = {
         eldergod.onload();
 
         // First actions
-        window.setInterval(this.secInterval.bind(this), 100);
+        window.setInterval(this.secInterval.bind(this), 1);
         window.setInterval(this.autoOpen.bind(this), 100);
         //cookie.cookiehandler = window.setInterval(cookie.autoSave, 1000);
     },
