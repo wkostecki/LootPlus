@@ -39,7 +39,7 @@
 "use strict";
 
 class Adventure {
-    constructor(mapLayout) {
+    constructor(mapLayout, enemyhp) {
         this.walls;
         this.projectiles;
         this.projectilesDmg;
@@ -65,6 +65,7 @@ class Adventure {
         this.pic = 3;
         this.spriteScale = 40;
         this.mapLayout = mapLayout;
+        this.enemyHP = enemyhp;
     }
 
     setup() {
@@ -214,46 +215,88 @@ function draw() {
     if (currentAdventure != null)
         currentAdventure.draw();
     else
-        background(255);
+        background(26, 24, 26);
 }
 
 function adventureStart()
 {
     var strUser = adventureoptions.options[adventureoptions.selectedIndex].value;
-    var ooo = false;
-    var WWW = true;
-    var enm = 2;
-    var pic = 3;
+    var oo = false;
+    var WW = true;
+    var en = 2;
+    var pk = 3;
     if (strUser == "Boring")
     {
         currentAdventure = new Adventure([
-            [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
-            [WWW, ooo, ooo, ooo, WWW, ooo, ooo, enm, ooo, ooo, ooo, WWW],
-            [WWW, ooo, WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW],
-            [WWW, ooo, WWW, ooo, ooo, ooo, WWW, ooo, WWW, WWW, ooo, WWW],
-            [WWW, ooo, WWW, ooo, WWW, WWW, ooo, enm, ooo, WWW, ooo, WWW],
-            [WWW, ooo, WWW, enm, WWW, WWW, ooo, WWW, ooo, WWW, enm, WWW],
-            [WWW, ooo, WWW, ooo, WWW, WWW, ooo, WWW, pic, WWW, ooo, WWW],
-            [WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW, WWW, WWW, ooo, WWW],
-            [WWW, ooo, WWW, ooo, ooo, ooo, ooo, ooo, ooo, WWW, ooo, WWW],
-            [WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, enm, WWW, ooo, WWW],
-            [WWW, ooo, WWW, ooo, ooo, ooo, ooo, WWW, ooo, ooo, ooo, WWW],
-            [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
-        ]);
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
+            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
+            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
+            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
+            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+        ], 15);
         currentAdventure.setup();
         //loop();
     }
     else if (strUser == "Average")
     {
-        
+        currentAdventure = new Adventure([
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
+            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
+            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
+            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
+            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+        ], 50);
+        currentAdventure.setup();
     }
     else if (strUser == "Exciting")
     {
-
+        currentAdventure = new Adventure([
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
+            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
+            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
+            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
+            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+        ], 50);
+        currentAdventure.setup();
     }
     else if (strUser == "Epic")
     {
-
+        currentAdventure = new Adventure([
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
+            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
+            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
+            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
+            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
+            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+        ], 50);
+        currentAdventure.setup();
     }
     else
         console.log("adventure selection not found");

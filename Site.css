@@ -16,7 +16,7 @@ body {
 }
 
 .logo {
-            background-image: url(/logo-white.png);
+            background-image: url(./logo-white.png);
             background-repeat: no-repeat;
             background-position: relative;
             height:182px;
