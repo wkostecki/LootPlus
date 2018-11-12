@@ -1,5 +1,22 @@
+body {
+    background-color: #1A181A;
+}
+
+
+.split{
+    margin: 20px;}
+
+.DaGame {
+    border: 1px solid black;
+    background-color: #e2e2e2;
+    padding-top: 2px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
 .logo {
-            background-image: url(/logo-black.png);
+            background-image: url(/logo-white.png);
             background-repeat: no-repeat;
             background-position: relative;
             height:182px;
@@ -29,12 +46,12 @@
 
 .buttonHome {
     position: relative;
-    background-color: #4770B7;
+    background-color: #52b270;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -65,12 +82,12 @@
 
 .buttonAbout {
     position: relative;
-    background-color: #52B270;
+    background-color: #e8b024;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -99,86 +116,14 @@
     transition: 0s
 }
 
-.buttonSpecs {
+.buttonTeam{
     position: relative;
      background-color: #E8B024;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
-    width: 100px;
-    text-align: center;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.buttonSpecs:after {
-    content: "";
-    background: #1A181A;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-}
-
-.buttonSpecs:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-}
-
-.buttonPlan {
-    position: relative;
-   background-color: #E52B3F;
-    border: none;
-    font-size: 14px;
-    color: #E2E2E2;
-    padding: 5px;
-    width: 100px;
-    text-align: center;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.buttonPlan:after {
-    content: "";
-    background: #1A181A;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-}
-
-.buttonPlan:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-}
-
-.buttonTeam {
-    position: relative;
-     background-color: #E8B024;
-    border: none;
-    font-size: 14px;
-    color: #E2E2E2;
-    padding: 5px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -207,14 +152,14 @@
     transition: 0s
 }
 
-.buttonBranding {
+.buttonNews {
     position: relative;
-     background-color: #4770B7;
+   background-color: #E52B3F;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
-    width: 100px;
+    width: 120px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -223,7 +168,7 @@
     cursor: pointer;
 }
 
-.buttonBranding:after {
+.buttonNews:after {
     content: "";
     background: #1A181A;
     display: block;
@@ -236,7 +181,115 @@
     transition: all 0.8s
 }
 
-.buttonBranding:active:after {
+.buttonNews:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonMesBoar {
+    position: relative;
+     background-color: #4770b7;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonMesBoar:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonMesBoar:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonSwag {
+    position: relative;
+     background-color: #52b270;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonSwag:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonSwag:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonGame{
+    position: relative;
+     background-color: #4770B7;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonGame:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonGame:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
