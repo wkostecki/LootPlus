@@ -1,151 +1,260 @@
-var walls;
-var projectiles;
-var projectilesDmg;
-var player;
-var playerMoveSpeed = 2;
-var enemies;
-var end;
-var fr = 30;
+// var walls;
+// var projectiles;
+// var projectilesDmg;
+// var player;
+// var playerMoveSpeed = 2;
+// var enemies;
+// var end;
+// var fr = 30;
 
-//shoot ability costs
-const cost1 = 10;
-const cost2 = 50;
-const cost3 = 200;
-const cost4 = 800;
-const cost5 = 800;
-const cost6 = 500;
+// //shoot ability costs
+// const cost1 = 10;
+// const cost2 = 50;
+// const cost3 = 200;
+// const cost4 = 800;
+// const cost5 = 800;
+// const cost6 = 500;
 
-var cooldown = fr;
-const cooldownTime = fr/3;
-const ooo = false;
-const WWW = true;
-const enm = 2;
-const pic = 3;
-const spriteScale = 40;
-const mapLayout = [
-    [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
-    [WWW, ooo, ooo, ooo, WWW, ooo, ooo, enm, ooo, ooo, ooo, WWW],
-    [WWW, ooo, WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW],
-    [WWW, ooo, WWW, ooo, ooo, ooo, WWW, ooo, WWW, WWW, ooo, WWW],
-    [WWW, ooo, WWW, ooo, WWW, WWW, ooo, enm, ooo, WWW, ooo, WWW],
-    [WWW, ooo, WWW, enm, WWW, WWW, ooo, WWW, ooo, WWW, enm, WWW],
-    [WWW, ooo, WWW, ooo, WWW, WWW, ooo, WWW, pic, WWW, ooo, WWW],
-    [WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW, WWW, WWW, ooo, WWW],
-    [WWW, ooo, WWW, ooo, ooo, ooo, ooo, ooo, ooo, WWW, ooo, WWW],
-    [WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, enm, WWW, ooo, WWW],
-    [WWW, ooo, WWW, ooo, ooo, ooo, ooo, WWW, ooo, ooo, ooo, WWW],
-    [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
-]
-function setup() {
-    var cnv = createCanvas(mapLayout.length * spriteScale, mapLayout[0].length * spriteScale);
-    var adv = adventure_canvas.getBoundingClientRect();
-    cnv.position(adv.left, adv.top + cnv.height/2);
-    frameRate(fr);
+// var cooldown = fr;
+// const cooldownTime = fr / 3;
+// const ooo = false;
+// const WWW = true;
+// const enm = 2;
+// const pic = 3;
+// const spriteScale = 40;
+// const mapLayout = [
+//     [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
+//     [WWW, ooo, ooo, ooo, WWW, ooo, ooo, enm, ooo, ooo, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, ooo, ooo, WWW, ooo, WWW, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, WWW, WWW, ooo, enm, ooo, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, enm, WWW, WWW, ooo, WWW, ooo, WWW, enm, WWW],
+//     [WWW, ooo, WWW, ooo, WWW, WWW, ooo, WWW, pic, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW, WWW, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, ooo, ooo, ooo, ooo, ooo, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, enm, WWW, ooo, WWW],
+//     [WWW, ooo, WWW, ooo, ooo, ooo, ooo, WWW, ooo, ooo, ooo, WWW],
+//     [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
+// ];
+"use strict";
 
-    //groups of sprites for iterations
-    walls = new Group();
-    projectiles = new Group();
-    projectilesDmg = new Array();
-    enemies = new Group();
-    
-    //player
-    player = createSprite(spriteScale * (mapLayout.length - 11) + spriteScale/2, spriteScale * (mapLayout[mapLayout.length - 1].length - 2) + spriteScale/2, spriteScale * 0.5, spriteScale * 0.5);
-    player.shapeColor = color(0, 255, 0);
+class Adventure {
+    constructor(mapLayout) {
+        this.walls;
+        this.projectiles;
+        this.projectilesDmg;
+        this.player;
+        this.playerMoveSpeed = 2;
+        this.enemies;
+        this.end;
+        this.fr = 30;
 
-    //goal
-    end = createSprite(spriteScale * (mapLayout.length - 6) + spriteScale/2, spriteScale * (mapLayout[mapLayout.length - 1].length - 2) + spriteScale/2, spriteScale * 0.75, spriteScale * 0.75);
-    end.shapeColor = color(0, 0, 255);
-    
-    //generate map
-    for (var i = 0; i < mapLayout.length; i++) {
-        for (var j = 0; j < mapLayout[i].length; j++) {
+        //shoot ability costs
+        this.cost1 = 50;
+        this.cost2 = 50;
+        this.cost3 = 50;
+        this.cost4 = 50;
+        this.cost5 = 50;
+        this.cost6 = 100;
 
-            //WALLS
-            if (mapLayout[i][j] == WWW) {
-                var w = createSprite(j * spriteScale + spriteScale/2, i * spriteScale + spriteScale/2,
-                    spriteScale, spriteScale);
-                w.shapeColor = color(99, 71, 51);
-                walls.add(w);
-            }
-            
-            //ENEMIES
-            if (mapLayout[i][j] == enm) {
-                var e = createSprite(j * spriteScale + spriteScale/2, i * spriteScale + spriteScale/2,
-                    spriteScale * 0.75, spriteScale * 0.75);
-                e.shapeColor = color(255, 0, 0);
-                enemies.add(e);
+        this.cooldown = this.fr;
+        this.cooldownTime = this.fr / 3;
+        this.ooo = false;
+        this.WWW = true;
+        this.enm = 2;
+        this.pic = 3;
+        this.spriteScale = 40;
+        this.mapLayout = mapLayout;
+    }
+
+    setup() {
+        //var cnv = createCanvas(this.mapLayout.length * this.spriteScale, this.mapLayout[0].length * this.spriteScale);
+        //var adv = adventure_canvas.getBoundingClientRect();
+        //cnv.position(adv.left, adv.top + cnv.height / 2);
+        frameRate(this.fr);
+
+        //groups of sprites for iterations
+        this.walls = new Group();
+        this.projectiles = new Group();
+        this.projectilesDmg = new Array();
+        this.enemies = new Group();
+
+        //player
+        this.player = createSprite(this.spriteScale * (this.mapLayout.length - 11) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.5, this.spriteScale * 0.5);
+        this.player.shapeColor = color(0, 255, 0);
+
+        //goal
+        this.end = createSprite(this.spriteScale * (this.mapLayout.length - 6) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.75, this.spriteScale * 0.75);
+        this.end.shapeColor = color(0, 0, 255);
+
+        //generate map
+        for (var i = 0; i < this.mapLayout.length; i++) {
+            for (var j = 0; j < this.mapLayout[i].length; j++) {
+
+                //WALLS
+                if (this.mapLayout[i][j] == this.WWW) {
+                    var w = createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
+                        this.spriteScale, this.spriteScale);
+                    w.shapeColor = color(99, 71, 51);
+                    this.walls.add(w);
+                }
+
+                //ENEMIES
+                if (this.mapLayout[i][j] == this.enm) {
+                    var e = createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
+                        this.spriteScale * 0.75, this.spriteScale * 0.75);
+                    e.shapeColor = color(255, 0, 0);
+                    this.enemies.add(e);
+                }
             }
         }
     }
+
+    draw() {
+        background(180);
+        this.cooldown++;
+        //player movement
+        if (keyDown('A'))
+            this.player.position.x -= this.playerMoveSpeed;
+        else if (keyDown('D'))
+            this.player.position.x += this.playerMoveSpeed;
+
+        if (keyDown('W'))
+            this.player.position.y -= this.playerMoveSpeed;
+        else if (keyDown('S'))
+            this.player.position.y += this.playerMoveSpeed;
+
+        if (keyDown('1') && lootbox.junk >= this.cost1 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 5);
+            lootbox.junk -= this.cost1;
+            this.cooldown = 0;
+        }
+        else if (keyDown('2') && lootbox.common >= this.cost2 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 50);
+            lootbox.common -= this.cost2;
+            this.cooldown = 0;
+        }
+        else if (keyDown('3') && lootbox.uncommon >= this.cost3 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 100);
+            lootbox.uncommon -= this.cost3;
+            this.cooldown = 0;
+        }
+        else if (keyDown('4') && lootbox.rare >= this.cost4 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 200);
+            lootbox.rare -= this.cost4;
+            this.cooldown = 0;
+        }
+        else if (keyDown('5') && lootbox.superRare >= this.cost5 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 500);
+            lootbox.superRare -= this.cost5;
+            this.cooldown = 0;
+        }
+        else if (keyDown('6') && lootbox.ultraRare >= this.cost6 && this.cooldown > this.cooldownTime) {
+            this.shoot(this.player, 5000000);
+            lootbox.ultraRare -= this.cost6;
+            this.cooldown = 0;
+        }
+
+        //stop player at wall
+        this.player.collide(this.walls);
+
+        //destroy projectiles on wall collision
+        for (var i = 0; i < this.projectiles.size(); i++)
+            if (this.projectiles.get(i).collide(this.walls))
+            {
+                this.projectiles.get(i).remove();
+                this.projectilesDmg = this.projectilesDmg.shiftAtIndex(i);
+            }
+
+        //iterate through all projectiles to check for collision with enemies
+        for (var i = 0; i < this.projectiles.size(); i++)
+        {
+            for (var j = 0; j < this.enemies.size(); j++)
+            {
+                if (this.projectiles[i].overlap(this.enemies[j]))
+                {
+                    //reduce enemy health by the projectile damage index
+                    this.enemies[j].health -= this.projectilesDmg[i];
+
+                    //remove projectile information from both arrays
+                    this.projectiles[i].remove();
+                    this.projectilesDmg = this.projectilesDmg.shiftAtIndex(i);
+                }
+            }
+        }
+
+        //end adventure on touching end
+        if (this.player.overlap(this.end))
+        {
+            currentAdventure = null;
+        }
+
+        drawSprites();
+    }
+
+    shoot(source, damage) {
+        var projectile = createSprite(source.position.x, source.position.y, 10, 10);
+    
+        var a = atan2(mouseY - source.position.y, mouseX - source.position.x);
+        projectile.setSpeed(this.playerMoveSpeed * 2, degrees(a));
+        projectile.shapeColor = color(0);
+        this.projectiles.add(projectile);
+        this.projectilesDmg.push(damage);
+    }
+}
+
+
+var currentAdventure;
+
+function setup() {
+    createCanvas(480, 480);
 }
 
 function draw() {
-    background(180);
-    cooldown++;
-    //player movement
-    if (keyDown('A'))
-        player.position.x -= playerMoveSpeed;
-    else if (keyDown('D'))
-        player.position.x += playerMoveSpeed;
-
-    if (keyDown('W'))
-        player.position.y -= playerMoveSpeed;
-    else if (keyDown('S'))
-        player.position.y += playerMoveSpeed;
-
-    if (keyDown('1') && lootbox.junk >= cost1 && cooldown > cooldownTime)
-    {
-        shoot(player, 5);
-        lootbox.junk -= cost1;
-        cooldown = 0;
-    }
-    else if (keyDown('2') && lootbox.common >= cost2 && cooldown > cooldownTime)
-    {
-        shoot(player, 50);
-        lootbox.common -= cost2;
-        cooldown = 0;
-    }
-    else if (keyDown('3') && lootbox.uncommon >= cost3 && cooldown > cooldownTime)
-    {
-        shoot(player, 100);
-        lootbox.uncommon -= cost3;
-        cooldown = 0;
-    }
-    else if (keyDown('4') && lootbox.rare >= cost4 && cooldown > cooldownTime)
-    {
-        shoot(player, 200);
-        lootbox.rare -= cost4;
-        cooldown = 0;
-    }
-    else if (keyDown('5') && lootbox.superRare >= cost5 && cooldown > cooldownTime)
-    {
-        shoot(player, 500);
-        lootbox.superRare -= cost5;
-        cooldown = 0;
-    }
-    else if (keyDown('6') && lootbox.ultraRare >= cost6 && cooldown > cooldownTime)
-    {
-        shoot(player, 500);
-        lootbox.ultraRare -= cost6;
-        cooldown = 0;
-    }
-
-    
-    player.collide(walls);
-
-    //destroy projectiles on wall collision
-    for (var i = 0; i < projectiles.size(); i++)
-        if (projectiles.get(i).collide(walls))
-            projectiles.get(i).remove();
-    drawSprites();
+    if (currentAdventure != null)
+        currentAdventure.draw();
+    else
+        background(255);
 }
 
-function shoot(source, damage) {
-    var projectile = createSprite(source.position.x, source.position.y, 10, 10);
-    
-    var a = atan2(mouseY - source.position.y, mouseX - source.position.x);
-    projectile.setSpeed(playerMoveSpeed * 2, degrees(a));
-    projectile.shapeColor = color(0);
-    projectiles.add(projectile);
-    projectilesDmg.push(damage);  
+function adventureStart()
+{
+    var strUser = adventureoptions.options[adventureoptions.selectedIndex].value;
+    var ooo = false;
+    var WWW = true;
+    var enm = 2;
+    var pic = 3;
+    if (strUser == "Boring")
+    {
+        currentAdventure = new Adventure([
+            [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
+            [WWW, ooo, ooo, ooo, WWW, ooo, ooo, enm, ooo, ooo, ooo, WWW],
+            [WWW, ooo, WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW],
+            [WWW, ooo, WWW, ooo, ooo, ooo, WWW, ooo, WWW, WWW, ooo, WWW],
+            [WWW, ooo, WWW, ooo, WWW, WWW, ooo, enm, ooo, WWW, ooo, WWW],
+            [WWW, ooo, WWW, enm, WWW, WWW, ooo, WWW, ooo, WWW, enm, WWW],
+            [WWW, ooo, WWW, ooo, WWW, WWW, ooo, WWW, pic, WWW, ooo, WWW],
+            [WWW, ooo, WWW, WWW, WWW, WWW, ooo, WWW, WWW, WWW, ooo, WWW],
+            [WWW, ooo, WWW, ooo, ooo, ooo, ooo, ooo, ooo, WWW, ooo, WWW],
+            [WWW, ooo, WWW, ooo, WWW, WWW, WWW, WWW, enm, WWW, ooo, WWW],
+            [WWW, ooo, WWW, ooo, ooo, ooo, ooo, WWW, ooo, ooo, ooo, WWW],
+            [WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW, WWW],
+        ]);
+        currentAdventure.setup();
+        //loop();
+    }
+    else if (strUser == "Average")
+    {
+        
+    }
+    else if (strUser == "Exciting")
+    {
+
+    }
+    else if (strUser == "Epic")
+    {
+
+    }
+    else
+        console.log("adventure selection not found");
 }
