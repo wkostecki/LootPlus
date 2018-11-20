@@ -1,7 +1,7 @@
 var lootbox = {
 
     // Variables
-    numberOwned: 0,
+    boxesOwned: 0,
     boxesPerSecond: 1,
     junk: 0,
     common: 0,
@@ -30,14 +30,14 @@ var lootbox = {
     
     open: function (opens) {
         
-        if (opens > this.numberOwned)
-            opens = this.numberOwned;
+        if (opens > this.boxesOwned)
+            opens = this.boxesOwned;
             
         for (var i = 0; i < opens; i++)
         {
-            if (this.numberOwned >= 1) {
+            if (this.boxesOwned >= 1) {
 
-                this.numberOwned -= 1;
+                this.boxesOwned -= 1;
                 var allChance = 101000;
                 var junkChance = allChance;
                 var commonChance = allChance / 2;
@@ -100,15 +100,17 @@ var lootbox = {
         this.UpdateText();
         buttons.checkLootbox();
         buttons.checkPurchaseableBuildings();
+        buttons.checkAdventure();
     },
     
     
     Increase : function(value){
-        this.numberOwned += value;
+        this.boxesOwned += value;
         this.totalNumberOwned += value;
         this.UpdateText();
         buttons.checkLootbox();
         buttons.checkPurchaseableBuildings();
+        buttons.checkAdventure();
         buttons.checkAutoOpen();
     },
 
@@ -118,7 +120,7 @@ var lootbox = {
         htmlInteraction.setInnerHtml("lbps", "lbps: " + this.boxesPerSecond);
 
         //lootboxes
-        if (this.numberOwned != 1) htmlInteraction.setInnerHtml("lootboxCount", "You have " + this.numberOwned + " lootboxes.");
+        if (this.boxesOwned != 1) htmlInteraction.setInnerHtml("lootboxCount", "You have " + this.boxesOwned + " lootboxes.");
         else htmlInteraction.setInnerHtml("lootboxCount", "You have 1 lootbox.");
 
         //junk

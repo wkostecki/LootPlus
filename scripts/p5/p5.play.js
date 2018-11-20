@@ -1370,10 +1370,6 @@ function Sprite(pInst, _x, _y, _w, _h) {
         this.life--;
       if (this.life === 0)
         this.remove();
-
-      //die at no hp
-      if (this.health === 0)
-        this.remove();
     }
   };//end update
 

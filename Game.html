@@ -3,11 +3,11 @@
 <!--<link rel="stylesheet" type="text/css" href="helloworld.css" /> -->
 
 <head>
-    
+
     <meta charset="utf-8" />
     <link rel="stylesheet" href="Site.css">
     <title>Lootbox Clicker</title>
-    
+
     <!-- bind interval function -->
     <script type="text/javascript" src="./scripts/main.js"></script>
 
@@ -36,8 +36,8 @@
 </head>
 
 <body>
-    
-    <div id = "mainlogo" class = "logo fadeIn"></div>
+
+    <div id="mainlogo" class="logo fadeIn"></div>
     <span><a href="./index.html"><button class="buttonHome">Home</button></a></span>
     <span><a href="./Game.html"><button class="buttonGame">Game</button></a></span>
     <span><a href="./About.html"><button class="buttonAbout">About</button></a></span>
@@ -45,61 +45,62 @@
     <span><a href="./Team.html"><button class="buttonTeam">Team</button></a></span>
     <span><a href="./MesBoar.html"><button class="buttonMesBoar">Message Board</button></a></span>
     <span><a href="./Swag.html"><button class="buttonSwag">Swag</button></a></span>
-<div id = "block" class = "split"></div>
-<hr style="border: 2px solid#4770b7;" />  
- <div id = "block" class = "split"></div>  
- <div id = "Blam" class = "DaGame">     
-    <span id="lbps"></span><br />
-    <span id="lootboxCount"></span><br />
-    <span id="junkCount"></span><br />
-    <span id="commonCount"></span><br />
-    <span id="uncommonCount"></span><br />
-    <span id="rareCount"></span><br />
-    <span id="superRareCount"></span><br />
-    <span id="ultraRareCount"></span><br />
-    <span id="uberRareCount"></span><br />
+    <div id="block" class="split"></div>
+    <hr style="border: 2px solid#4770b7;" />
+    <div id="block" class="split"></div>
+    <div id="Blam" class="DaGame">
+        <span id="lbps"></span><br />
+        <span id="lootboxCount"></span><br />
+        <span id="junkCount"></span><br />
+        <span id="commonCount"></span><br />
+        <span id="uncommonCount"></span><br />
+        <span id="rareCount"></span><br />
+        <span id="superRareCount"></span><br />
+        <span id="ultraRareCount"></span><br />
+        <span id="uberRareCount"></span><br />
 
-    <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
-    <form>
-        <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" 
-                id="auto_open_checkbox" style="visibility:hidden">
+        <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
+        <form>
+            <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox"
+                style="visibility:hidden">
             <label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
-    </form>
-    <br />
-    <br />
-    <button class="home_button" id="business" onclick="business.buy();" style="visibility:hidden"></button>
-    <span id="businessblurb" style="visibility:hidden"></span>
-    <br />
-    <button class="home_button" id="pirate" onclick="pirate.buy();" style="visibility:hidden"></button>
-    <span id="pirateblurb" style="visibility:hidden"></span>
-    <br />
-    <button class="home_button" id="cow" onclick="cow.buy();" style="visibility:hidden"></button>
-    <span id="cowblurb" style="visibility:hidden"></span>
-    <br />
-    <button class="home_button" id="farm" onclick="farm.buy();" style="visibility:hidden"></button>
-    <span id="farmblurb" style="visibility:hidden"></span>
-    <br />
-    <button class="home_button" id="marketer" onclick="marketer.buy();" style="visibility:hidden"></button>
-    <span id="marketerblurb" style="visibility:hidden"></span>
-    <br />
-    <button class="home_button" id="eldergod" onclick="eldergod.buy();" style="visibility:hidden"></button>
-    <span id="eldergodblurb" style="visibility:hidden"></span>
-    <p>Go on an adventure?</p>
-<select id="adventureoptions">
-    <option value="Boring">Boring</option>
-    <option value="Average">Average</option>
-    <option value="Exciting">Exciting</option>
-    <option value="Epic">E P I C</option>
-  </select>
-  <button class="home_button" id="adventurebutton" onclick="adventureStart();" style="visibility:show">Go</button>
-  <p>How to play:
-      WASD to move.
-      1-6 to fire projectiles at enemies (red). Projectiles fire at mouse location.
-      Get to the blue to win.
-  </p>
-</div>
+        </form>
+        <br />
+        <br />
+        <button class="home_button" id="business" onclick="business.buy();" style="visibility:hidden"></button>
+        <span id="businessblurb" style="visibility:hidden"></span>
+        <br />
+        <button class="home_button" id="pirate" onclick="pirate.buy();" style="visibility:hidden"></button>
+        <span id="pirateblurb" style="visibility:hidden"></span>
+        <br />
+        <button class="home_button" id="cow" onclick="cow.buy();" style="visibility:hidden"></button>
+        <span id="cowblurb" style="visibility:hidden"></span>
+        <br />
+        <button class="home_button" id="farm" onclick="farm.buy();" style="visibility:hidden"></button>
+        <span id="farmblurb" style="visibility:hidden"></span>
+        <br />
+        <button class="home_button" id="marketer" onclick="marketer.buy();" style="visibility:hidden"></button>
+        <span id="marketerblurb" style="visibility:hidden"></span>
+        <br />
+        <button class="home_button" id="eldergod" onclick="eldergod.buy();" style="visibility:hidden"></button>
+        <span id="eldergodblurb" style="visibility:hidden"></span>
+        <div id="adventureAvailable" style="visibility:hidden">
+            <p>Go on an adventure? Cost: 1 uber rare.</p>
+            <select id="adventureoptions">
+                <option value="Boring">Boring</option>
+            </select>
+            <button class="home_button" id="adventurebutton" onclick="adventureStart();" style="visibility:show">Go</button>
+            <p>How to play:
+                WASD to move.<br>
+                1-6 to fire projectiles at enemies (differently colored based on difficulty). Projectiles fire towards
+                your cursor.<br>
+                Killing enemies and reaching the end reward loot based on difficulty.<br>
+                Get to the blue box to win.
+            </p>
+        </div>
+    </div>
 
-<div class="home_button" id="adventure_canvas"></div>
+    <div class="home_button" id="adventure_canvas"></div>
 </body>
 
 </html>

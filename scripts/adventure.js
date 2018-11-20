@@ -39,13 +39,14 @@
 "use strict";
 
 class Adventure {
-    constructor(mapLayout, enemyhp) {
+    constructor(mapLayout, enemyhp, enemydamage, difficultycolor) {
         this.walls;
-        this.projectiles;
-        this.projectilesDmg;
-        this.player;
-        this.playerMoveSpeed = 2;
         this.enemies;
+        this.playerProjectiles;
+        this.playerProjectilesDmg;
+        this.enemyProjectiles;
+        this.player;
+        this.playerMoveSpeed = 20;
         this.end;
         this.fr = 30;
 
@@ -57,8 +58,18 @@ class Adventure {
         this.cost5 = 50;
         this.cost6 = 100;
 
+        //player shoot cooldown
         this.cooldown = this.fr;
         this.cooldownTime = this.fr / 3;
+
+        //enemy shoot cooldown
+
+
+        //enemy shoot range
+        this.enemyRange = 100;
+        this.enemyDamage = enemydamage;
+        this.enemyColor = difficultycolor;
+
         this.ooo = false;
         this.WWW = true;
         this.enm = 2;
@@ -76,13 +87,15 @@ class Adventure {
 
         //groups of sprites for iterations
         this.walls = new Group();
-        this.projectiles = new Group();
-        this.projectilesDmg = new Array();
-        this.enemies = new Group();
+        this.playerProjectiles = new Group();
+        this.playerProjectilesDmg = new Array();
+        this.enemyProjectiles = new Group();
+        this.enemies = new Array();
 
         //player
         this.player = createSprite(this.spriteScale * (this.mapLayout.length - 11) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.5, this.spriteScale * 0.5);
         this.player.shapeColor = color(0, 255, 0);
+        this.player.health = 100;
 
         //goal
         this.end = createSprite(this.spriteScale * (this.mapLayout.length - 6) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.75, this.spriteScale * 0.75);
@@ -102,10 +115,11 @@ class Adventure {
 
                 //ENEMIES
                 if (this.mapLayout[i][j] == this.enm) {
-                    var e = createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
-                        this.spriteScale * 0.75, this.spriteScale * 0.75);
-                    e.shapeColor = color(255, 0, 0);
-                    this.enemies.add(e);
+                    var e = new Enemy(this.enemyHP, this.enemyColor, this.enemyDamage,
+                        createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
+                            this.spriteScale * 0.75, this.spriteScale * 0.75));
+                    e.sprite.shapeColor = this.enemyColor;
+                    this.enemies.push(e);
                 }
             }
         }
@@ -126,32 +140,32 @@ class Adventure {
             this.player.position.y += this.playerMoveSpeed;
 
         if (keyDown('1') && lootbox.junk >= this.cost1 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 5);
+            this.playerShoot(this.player, 5);
             lootbox.junk -= this.cost1;
             this.cooldown = 0;
         }
         else if (keyDown('2') && lootbox.common >= this.cost2 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 50);
+            this.playerShoot(this.player, 50);
             lootbox.common -= this.cost2;
             this.cooldown = 0;
         }
         else if (keyDown('3') && lootbox.uncommon >= this.cost3 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 100);
+            this.playerShoot(this.player, 100);
             lootbox.uncommon -= this.cost3;
             this.cooldown = 0;
         }
         else if (keyDown('4') && lootbox.rare >= this.cost4 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 200);
+            this.playerShoot(this.player, 200);
             lootbox.rare -= this.cost4;
             this.cooldown = 0;
         }
         else if (keyDown('5') && lootbox.superRare >= this.cost5 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 500);
+            this.playerShoot(this.player, 500);
             lootbox.superRare -= this.cost5;
             this.cooldown = 0;
         }
         else if (keyDown('6') && lootbox.ultraRare >= this.cost6 && this.cooldown > this.cooldownTime) {
-            this.shoot(this.player, 5000000);
+            this.playerShoot(this.player, 5000000);
             lootbox.ultraRare -= this.cost6;
             this.cooldown = 0;
         }
@@ -160,73 +174,110 @@ class Adventure {
         this.player.collide(this.walls);
 
         //destroy projectiles on wall collision
-        for (var i = 0; i < this.projectiles.size(); i++)
-            if (this.projectiles.get(i).collide(this.walls))
-            {
-                this.projectiles.get(i).remove();
-                this.projectilesDmg = this.projectilesDmg.shiftAtIndex(i);
+        for (var i = 0; i < this.playerProjectiles.size(); i++)
+            if (this.playerProjectiles[i].collide(this.walls)) {
+                this.playerProjectiles[i].remove();
+                this.playerProjectilesDmg = this.playerProjectilesDmg.shiftAtIndex(i);
             }
 
         //iterate through all projectiles to check for collision with enemies
-        for (var i = 0; i < this.projectiles.size(); i++)
-        {
-            for (var j = 0; j < this.enemies.size(); j++)
-            {
-                if (this.projectiles[i].overlap(this.enemies[j]))
-                {
-                    //reduce enemy health by the projectile damage index
-                    this.enemies[j].health -= this.projectilesDmg[i];
+        for (var j = 0; j < this.enemies.length; j++) {
+            //might as well update enemy per frame as well
+            this.enemies[j].shoot();
+            //if (this.enemies[j].projectiles.size() > 0)
+            this.enemies[j].checkCollision();
 
+            for (var i = 0; i < this.playerProjectiles.size(); i++) {
+                if (this.playerProjectiles[i].overlap(this.enemies[j].sprite)) {
+                    this.enemies[j].sprite.health -= this.playerProjectilesDmg[i];
+                    console.log(this.enemies[j].sprite.health);
                     //remove projectile information from both arrays
-                    this.projectiles[i].remove();
-                    this.projectilesDmg = this.projectilesDmg.shiftAtIndex(i);
+                    this.playerProjectiles[i].remove();
+                    this.playerProjectilesDmg = this.playerProjectilesDmg.shiftAtIndex(i);
+                    i--;
                 }
             }
         }
 
-        //end adventure on touching end
-        if (this.player.overlap(this.end))
-        {
-            currentAdventure = null;
-        }
+        //kill enemies if they have <0 hp
+        //this is done separately to avoid undefineds during collision checking
+        for (var j = 0; j < this.enemies.length; j++)
+            if (this.enemies[j].sprite.health <= 0) {
+                console.log("dead enemy");
+                this.enemies[j].die();
+                this.enemies = this.enemies.shiftAtIndex(j);
+                j--;
+            }
 
+        //end adventure on touching end
+        if (this.player.overlap(this.end)) {
+            postAdventureMessage = 'YOU WON!';
+            if (adventuresTaken < newAdventures.length) {
+                adventuresTaken++;
+                adventureoptions.innerHTML += "<option value=" + newAdventures[adventuresTaken] + ">" + newAdventures[adventuresTaken] + "</option>";
+            }
+            this.endAdventure();
+        }
+        else if (this.player.health <= 0) {
+            postAdventureMessage = 'YOU DIED.';
+            this.endAdventure();
+        }
         drawSprites();
     }
 
-    shoot(source, damage) {
+    endAdventure() {
+        currentAdventure = null;
+        this.walls.removeSprites();
+        this.playerProjectiles.removeSprites();
+        this.playerProjectilesDmg = null;
+        this.player.remove();
+    }
+
+    playerShoot(source, damage) {
         var projectile = createSprite(source.position.x, source.position.y, 10, 10);
-    
+
         var a = atan2(mouseY - source.position.y, mouseX - source.position.x);
         projectile.setSpeed(this.playerMoveSpeed * 2, degrees(a));
         projectile.shapeColor = color(0);
-        this.projectiles.add(projectile);
-        this.projectilesDmg.push(damage);
+        projectile.life = 100;
+        this.playerProjectiles.add(projectile);
+        this.playerProjectilesDmg.push(damage);
     }
 }
 
 
 var currentAdventure;
+var postAdventureMessage = '';
+var adventuresTaken = 0;
+var newAdventures = ["Boring", "Average", "Exciting", "E P I C"];
 
 function setup() {
     createCanvas(480, 480);
+
 }
 
 function draw() {
     if (currentAdventure != null)
         currentAdventure.draw();
-    else
+    else {
         background(26, 24, 26);
+        textAlign(CENTER, CENTER);
+        textSize(30);
+        fill(255);
+        text(postAdventureMessage, 240, 240);
+    }
 }
 
-function adventureStart()
-{
+function adventureStart() {
+    if (currentAdventure != null)
+        currentAdventure.endAdventure();
+    lootbox.uberRare -= 1;
     var strUser = adventureoptions.options[adventureoptions.selectedIndex].value;
     var oo = false;
     var WW = true;
     var en = 2;
     var pk = 3;
-    if (strUser == "Boring")
-    {
+    if (strUser == "Boring") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
             [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
@@ -240,12 +291,11 @@ function adventureStart()
             [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
             [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 15);
+        ], 15, 2, color(255, 255, 255));
         currentAdventure.setup();
         //loop();
     }
-    else if (strUser == "Average")
-    {
+    else if (strUser == "Average") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
             [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
@@ -259,11 +309,10 @@ function adventureStart()
             [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
             [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 50);
+        ], 50, 10, color(0, 200, 0));
         currentAdventure.setup();
     }
-    else if (strUser == "Exciting")
-    {
+    else if (strUser == "Exciting") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
             [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
@@ -277,11 +326,10 @@ function adventureStart()
             [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
             [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 50);
+        ], 200);
         currentAdventure.setup();
     }
-    else if (strUser == "Epic")
-    {
+    else if (strUser == "E P I C") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
             [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
@@ -295,9 +343,82 @@ function adventureStart()
             [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
             [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 50);
+        ], 1000);
         currentAdventure.setup();
     }
     else
         console.log("adventure selection not found");
 }
+
+class Enemy {
+    constructor(hp, color, damage, sprite) {
+        this.hp = hp;
+        this.color = color;
+        this.cooldown = currentAdventure.fr * 2;
+        this.cooldownTime = currentAdventure.fr * 2 / 3;
+        this.range = 150;
+        this.sprite = sprite;
+        this.sprite.health = hp;
+        this.position;
+        this.projectiles = new Group();
+        this.damage = damage;
+    }
+
+    die() {
+        this.sprite.remove();
+        //this.projectiles.removeSprites();
+        //this.projectiles = null;
+    }
+
+    checkCollision() {
+        //check for wall collision
+        for (var i = 0; i < this.projectiles.size(); i++)
+            if (this.projectiles[i].collide(currentAdventure.walls)) {
+                this.projectiles[i].remove();
+                i--;
+            }
+
+        //check for player collision
+        for (var i = 0; i < this.projectiles.size(); i++)
+            if (this.projectiles[i].overlap(currentAdventure.player)) {
+                currentAdventure.player.health -= this.damage;
+                console.log('player hp ' + currentAdventure.player.health);
+                this.projectiles[i].remove();
+                i--;
+            }
+    }
+
+    shoot() {
+        var d = int(dist(currentAdventure.player.position.x, currentAdventure.player.position.y,
+            this.sprite.position.x, this.sprite.position.y));
+        this.cooldown++;
+
+        if (d < this.range && this.cooldown > this.cooldownTime) {
+            this.cooldown = 0;
+            var projectile = createSprite(this.sprite.position.x, this.sprite.position.y, 12, 12);
+
+            var a = atan2(currentAdventure.player.position.y - this.sprite.position.y,
+                currentAdventure.player.position.x - this.sprite.position.x);
+            projectile.setSpeed(currentAdventure.playerMoveSpeed * 1.5, degrees(a));
+            projectile.shapeColor = this.color;
+            projectile.life = 100;
+            this.projectiles.add(projectile);
+        }
+    }
+}
+
+
+// shoot() {
+//     for (var i = 0; i < this.enemies.size(); i++) {
+//         var d = int(dist(this.player.position.x, this.player.position.y, this.enemies[i].position.x, this.enemies[i].position.y));
+//         if (d < this.enemyRange) {
+//             var projectile = createSprite(this.enemies[i].position.x, this.enemies[i].position.y, 12, 12);
+
+//             var a = atan2(this.player.position.y - this.enemies[i].position.y, this.player.position.x - this.enemies[i].position.x);
+//             projectile.setSpeed(this.playerMoveSpeed * 1.5, degrees(a));
+//             projectile.shapeColor = this.enemyColor;
+//             this.enemyProjectiles.add(projectile);
+//         }
+//     }
+
+// }

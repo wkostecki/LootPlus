@@ -30,7 +30,7 @@ var buttons = {
 
     checkLootbox: function () {
         // Show the eat button
-        if (lootbox.numberOwned >= 1) {
+        if (lootbox.boxesOwned >= 1) {
             htmlInteraction.showButton("open");
             this.enableButton("open");
         }
@@ -48,6 +48,12 @@ var buttons = {
             htmlInteraction.setElementVisibility("auto_open_checkbox_label", true);
 
         }
+    },
+    checkAdventure: function () {
+        if (lootbox.uberRare > 0)
+            htmlInteraction.setElementVisibility("adventureAvailable", true);
+        else
+            htmlInteraction.setElementVisibility("adventureAvailable", false);
     },
 
     checkPurchaseableBuildings: function () {
