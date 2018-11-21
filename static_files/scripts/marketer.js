@@ -2,10 +2,10 @@ var marketer = {
 
     cost: 100,
     purchaseType: "super rare",
-    lbps: 25,
+    lbps: 150,
     totalOwned: 0,
-    initialCost: 100,
-    costIncPer: 1.18,
+    initialCost: 45,
+    costIncPer: 1.23,
 
     onload: function () {
         this.totalOwned = 0;

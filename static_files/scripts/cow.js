@@ -2,9 +2,9 @@ var cow = {
 
     cost: 100,
     purchaseType: "uncommon",
-    lbps: 5,
+    lbps: 10,
     totalOwned: 0,
-    initialCost: 100,
+    initialCost: 30,
     costIncPer: 1.18,
 
     onload: function () {

@@ -39,24 +39,24 @@
 "use strict";
 
 class Adventure {
-    constructor(mapLayout, enemyhp, enemydamage, difficultycolor) {
+    constructor(mapLayout, enemyhp, enemydamage, difficultycolor, endReward) {
         this.walls;
         this.enemies;
         this.playerProjectiles;
         this.playerProjectilesDmg;
         this.enemyProjectiles;
         this.player;
-        this.playerMoveSpeed = 20;
+        this.playerMoveSpeed = 5;
         this.end;
         this.fr = 30;
-
+        this.endReward = endReward;
         //shoot ability costs
-        this.cost1 = 50;
-        this.cost2 = 50;
-        this.cost3 = 50;
-        this.cost4 = 50;
-        this.cost5 = 50;
-        this.cost6 = 100;
+        this.cost1 = 0;
+        this.cost2 = 1000;
+        this.cost3 = 1000;
+        this.cost4 = 1000;
+        this.cost5 = 1000;
+        this.cost6 = 1000;
 
         //player shoot cooldown
         this.cooldown = this.fr;
@@ -73,7 +73,9 @@ class Adventure {
         this.ooo = false;
         this.WWW = true;
         this.enm = 2;
-        this.pic = 3;
+        //this.pic = 3;
+        this.pl = 4;
+        this.ta = 5;
         this.spriteScale = 40;
         this.mapLayout = mapLayout;
         this.enemyHP = enemyhp;
@@ -92,23 +94,30 @@ class Adventure {
         this.enemyProjectiles = new Group();
         this.enemies = new Array();
 
-        //player
-        this.player = createSprite(this.spriteScale * (this.mapLayout.length - 11) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.5, this.spriteScale * 0.5);
-        this.player.shapeColor = color(0, 255, 0);
-        this.player.health = 100;
 
-        //goal
-        this.end = createSprite(this.spriteScale * (this.mapLayout.length - 6) + this.spriteScale / 2, this.spriteScale * (this.mapLayout[this.mapLayout.length - 1].length - 2) + this.spriteScale / 2, this.spriteScale * 0.75, this.spriteScale * 0.75);
-        this.end.shapeColor = color(0, 0, 255);
+
+
 
         //generate map
         for (var i = 0; i < this.mapLayout.length; i++) {
             for (var j = 0; j < this.mapLayout[i].length; j++) {
 
+                //player
+                if (this.mapLayout[i][j] == this.pl) {
+                    this.player = createSprite(j * this.spriteScale + this.spriteScale / 2,
+                        i * this.spriteScale + this.spriteScale / 2,
+                        this.spriteScale * 0.5,
+                        this.spriteScale * 0.5);
+                    this.player.shapeColor = color(0, 255, 0);
+                    this.player.health = 100;
+                }
+
                 //WALLS
                 if (this.mapLayout[i][j] == this.WWW) {
-                    var w = createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
-                        this.spriteScale, this.spriteScale);
+                    var w = createSprite(j * this.spriteScale + this.spriteScale / 2,
+                        i * this.spriteScale + this.spriteScale / 2,
+                        this.spriteScale,
+                        this.spriteScale);
                     w.shapeColor = color(99, 71, 51);
                     this.walls.add(w);
                 }
@@ -116,10 +125,21 @@ class Adventure {
                 //ENEMIES
                 if (this.mapLayout[i][j] == this.enm) {
                     var e = new Enemy(this.enemyHP, this.enemyColor, this.enemyDamage,
-                        createSprite(j * this.spriteScale + this.spriteScale / 2, i * this.spriteScale + this.spriteScale / 2,
-                            this.spriteScale * 0.75, this.spriteScale * 0.75));
+                        createSprite(j * this.spriteScale + this.spriteScale / 2,
+                            i * this.spriteScale + this.spriteScale / 2,
+                            this.spriteScale * 0.75,
+                            this.spriteScale * 0.75));
                     e.sprite.shapeColor = this.enemyColor;
                     this.enemies.push(e);
+                }
+
+                //goal
+                if (this.mapLayout[i][j] == this.ta) {
+                    this.end = createSprite(j * this.spriteScale + this.spriteScale / 2,
+                        i * this.spriteScale + this.spriteScale / 2,
+                        this.spriteScale * 0.75,
+                        this.spriteScale * 0.75);
+                    this.end.shapeColor = color(0, 0, 255);
                 }
             }
         }
@@ -145,27 +165,27 @@ class Adventure {
             this.cooldown = 0;
         }
         else if (keyDown('2') && lootbox.common >= this.cost2 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 50);
+            this.playerShoot(this.player, 10);
             lootbox.common -= this.cost2;
             this.cooldown = 0;
         }
         else if (keyDown('3') && lootbox.uncommon >= this.cost3 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 100);
+            this.playerShoot(this.player, 25);
             lootbox.uncommon -= this.cost3;
             this.cooldown = 0;
         }
         else if (keyDown('4') && lootbox.rare >= this.cost4 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 200);
+            this.playerShoot(this.player, 50);
             lootbox.rare -= this.cost4;
             this.cooldown = 0;
         }
         else if (keyDown('5') && lootbox.superRare >= this.cost5 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 500);
+            this.playerShoot(this.player, 100);
             lootbox.superRare -= this.cost5;
             this.cooldown = 0;
         }
         else if (keyDown('6') && lootbox.ultraRare >= this.cost6 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 5000000);
+            this.playerShoot(this.player, -10);
             lootbox.ultraRare -= this.cost6;
             this.cooldown = 0;
         }
@@ -211,11 +231,10 @@ class Adventure {
 
         //end adventure on touching end
         if (this.player.overlap(this.end)) {
-            postAdventureMessage = 'YOU WON!';
-            if (adventuresTaken < newAdventures.length) {
-                adventuresTaken++;
-                adventureoptions.innerHTML += "<option value=" + newAdventures[adventuresTaken] + ">" + newAdventures[adventuresTaken] + "</option>";
-            }
+            postAdventureMessage = 'YOU WON!\nYou earned ' + this.endReward + ' lootboxes.';
+            lootbox.Increase(this.endReward);
+            adventuresTaken++;
+            setAdventuresTaken();
             this.endAdventure();
         }
         else if (this.player.health <= 0) {
@@ -228,9 +247,14 @@ class Adventure {
     endAdventure() {
         currentAdventure = null;
         this.walls.removeSprites();
+        this.walls = null;
         this.playerProjectiles.removeSprites();
         this.playerProjectilesDmg = null;
+        for (var i = 0; i < this.enemies.length; i++)
+            this.enemies[i].die();
+        this.enemies = null;
         this.player.remove();
+        this.end.remove();
     }
 
     playerShoot(source, damage) {
@@ -248,12 +272,12 @@ class Adventure {
 
 var currentAdventure;
 var postAdventureMessage = '';
-var adventuresTaken = 0;
-var newAdventures = ["Boring", "Average", "Exciting", "E P I C"];
+var adventuresTaken = 1;
+var newAdventures = ["Boring", "Average", "Exciting", "EPIC"];
 
 function setup() {
     createCanvas(480, 480);
-
+    setAdventuresTaken();
 }
 
 function draw() {
@@ -268,6 +292,14 @@ function draw() {
     }
 }
 
+function setAdventuresTaken() {
+    //if (adventuresTaken <= newAdventures.length) {
+    adventureoptions.innerHTML = "";
+    for (var i = 0; i < newAdventures.length && i < adventuresTaken; i++)
+        adventureoptions.innerHTML += "<option value=" + newAdventures[i] + ">" + newAdventures[i] + "</option>";
+    //}
+}
+
 function adventureStart() {
     if (currentAdventure != null)
         currentAdventure.endAdventure();
@@ -276,7 +308,8 @@ function adventureStart() {
     var oo = false;
     var WW = true;
     var en = 2;
-    var pk = 3;
+    var pl = 4;
+    var ta = 5;
     if (strUser == "Boring") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
@@ -285,65 +318,65 @@ function adventureStart() {
             [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
             [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
             [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
-            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, oo, WW, oo, WW, oo, WW],
             [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
             [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
             [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, pl, oo, oo, oo, oo, ta, WW, oo, oo, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 15, 2, color(255, 255, 255));
+        ], 15, 2, color(255, 255, 255), 500);
         currentAdventure.setup();
         //loop();
     }
     else if (strUser == "Average") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
-            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
-            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
-            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
-            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, oo, oo, en, oo, oo, oo, oo, oo, en, oo, WW],
+            [WW, oo, WW, WW, WW, WW, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, oo, en, oo, oo, oo, oo, WW, en, WW],
+            [WW, en, WW, oo, WW, WW, WW, WW, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, ta, WW, WW, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, en, WW, WW, en, WW, oo, WW],
+            [WW, oo, WW, en, WW, oo, WW, WW, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, oo, oo, oo, oo, WW, oo, WW],
+            [WW, oo, WW, oo, WW, WW, WW, WW, WW, WW, oo, WW],
+            [WW, pl, WW, oo, oo, en, oo, oo, oo, oo, en, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 50, 10, color(0, 200, 0));
+        ], 50, 10, color(255, 175, 175), 2500);
         currentAdventure.setup();
     }
     else if (strUser == "Exciting") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
-            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
-            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
-            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
-            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, WW, ta, WW, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, en, oo, WW, en, WW, en, WW, oo, WW, oo, WW],
+            [WW, oo, WW, WW, oo, WW, en, WW, en, WW, oo, WW],
+            [WW, oo, oo, en, oo, WW, oo, oo, oo, WW, en, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, oo, WW],
+            [WW, oo, oo, en, WW, en, oo, oo, WW, oo, oo, WW],
+            [WW, oo, WW, oo, oo, oo, WW, oo, en, oo, WW, WW],
+            [WW, en, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
+            [WW, oo, WW, oo, en, oo, WW, en, oo, oo, WW, WW],
+            [WW, oo, oo, oo, WW, oo, oo, oo, WW, oo, pl, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 200);
+        ], 100, 25, color(255, 75, 75), 10000);
         currentAdventure.setup();
     }
-    else if (strUser == "E P I C") {
+    else if (strUser == "EPIC") {
         currentAdventure = new Adventure([
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-            [WW, oo, oo, oo, WW, oo, oo, en, oo, oo, oo, WW],
-            [WW, oo, WW, oo, WW, oo, WW, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, WW, oo, WW, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, oo, en, oo, WW, oo, WW],
-            [WW, oo, WW, en, WW, WW, oo, WW, oo, WW, en, WW],
-            [WW, oo, WW, oo, WW, WW, oo, WW, pk, WW, oo, WW],
-            [WW, oo, WW, WW, WW, WW, oo, WW, WW, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, oo, oo, WW, oo, WW],
-            [WW, oo, WW, oo, WW, WW, WW, WW, en, WW, oo, WW],
-            [WW, oo, WW, oo, oo, oo, oo, WW, oo, oo, oo, WW],
+            [WW, oo, oo, en, oo, oo, en, oo, oo, oo, en, WW],
+            [WW, en, WW, WW, WW, WW, WW, WW, WW, WW, oo, WW],
+            [WW, oo, WW, WW, oo, en, oo, WW, oo, oo, en, WW],
+            [WW, en, oo, WW, oo, WW, oo, WW, en, WW, WW, WW],
+            [WW, WW, en, WW, en, WW, pl, WW, oo, oo, en, WW],
+            [WW, WW, oo, en, oo, WW, WW, WW, WW, WW, oo, WW],
+            [WW, WW, WW, WW, WW, WW, WW, WW, oo, oo, en, WW],
+            [WW, WW, oo, en, oo, WW, oo, WW, en, WW, WW, WW],
+            [WW, WW, en, WW, en, WW, en, WW, oo, WW, WW, WW],
+            [WW, ta, oo, WW, oo, oo, en, oo, oo, en, oo, WW],
             [WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW, WW],
-        ], 1000);
+        ], 100, 50, color(255, 0, 0), 1000000);
         currentAdventure.setup();
     }
     else

@@ -2,9 +2,9 @@ var farm = {
 
     cost: 100,
     purchaseType: "rare",
-    lbps: 10,
+    lbps: 50,
     totalOwned: 0,
-    initialCost: 100,
+    initialCost: 35,
     costIncPer: 1.18,
 
     onload: function () {
