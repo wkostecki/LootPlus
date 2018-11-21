@@ -1,29 +1,232 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <meta charset="utf-8" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>WPK</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Rozha+One" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="Site.css">
+
     <title>About</title>
 </head>
+
 <body>
-<div id = "mainlogo" class = "logo fadeIn"></div>
+    <div id="mainlogo" class="logo fadeIn"></div>
 
     <span><a href="./"><button class="buttonHome">Home</button></a></span>
     <span><a href="./game"><button class="buttonGame">Game</button></a></span>
     <span><a href="./about"><button class="buttonAbout">About</button></a></span>
-    <span><a href="./news"><button class="buttonNews">News</button></a></span>
-    <span><a href="./team"><button class="buttonTeam">Team</button></a></span>
     <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
-    <span><a href="./swag"><button class="buttonSwag">Swag</button></a></span>
-<div id = "block" class = "split"></div>
-<hr style="border: 2px solid#e8b024;" />  
-<div id = "block" class = "split"></div>
-{% if not user %}
+    <div id="block" class="split"></div>
+    <hr style="border: 2px solid#e8b024;" />
+    <div id="block" class="split"></div>
+    {% if not user %}
     <a href="/login">Log In</a>
     <a href="/register">Register</a>
-{% else %}  
+    {% else %}
     <a href="/logout">Log out</a>
-{% endif %}  
-    
+    {% endif %}
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase" style="color:#e52b3f">The Team</h2>
+                    <h3 class="section-subheading text-muted">Catch up with the creators of Loot Plus</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal3">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/team/WillS.jpg" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>William Kostecki</h4>
+                        <p class="text-muted">Frontend Frontierman</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/team/PeterS.jpg" alt="">
+                    </a>
+
+                    <div class="portfolio-caption">
+                        <h4>Peter Siburg</h4>
+                        <p class="text-muted">King of (JS) Games</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item"><a class="portfolio-link" data-toggle="modal" href="#portfolioModal4">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/team/TempS.jpg" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Vicente Gonzalez</h4>
+                        <p class="text-muted">Backend Boogaloo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Team Modals -->
+
+    <!-- Modal 1 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2 class="text-uppercase">Peter Siburg</h2>
+                                <p class="item-intro text-muted">King of (JS) Games</p>
+                                <img class="img-fluid d-block mx-auto" src="img/team/PeterL.jpg" alt="">
+                                <p>I am an Informatics major with a focus on gaming at Arizona State University. I’ve been playing games for as long as I can remember and as a consequence, have a hard time not turning anything I create into a game including this project which I will code the game itself for. My favorite series of all time is Zelda and have poured an unhealthy amount of time into the MMO genre.</p>
+                                <ul class="list-inline">
+                                    <li>Date Joined: August 30th, 2018</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    <i class="fa fa-times"></i>
+                                    Close Article</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal 2 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2 class="text-uppercase">William Kostecki</h2>
+                                <p class="item-intro text-muted">Frontend Frontierman</p>
+                                <img class="img-fluid d-block mx-auto" src="img/team/WillL.jpg" alt="">
+                                <p>I’m an undergraduate student at Arizona State University majoring in Computer Science. My main interests include videogames, cooking, and anime. I am the lead for the front-end development of this project. Through Loot Plus, I look forward to further developing my coding skills.</p>
+                                <ul class="list-inline">
+                                    <li>Date Joined: August 30th, 2018</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    <i class="fa fa-times"></i>
+                                    Close Article</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal 3 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <h2 class="text-uppercase">Vicente Gonzalez</h2>
+                                <p class="item-intro text-muted">Backend Boogaloo</p>
+                                <img class="img-fluid d-block mx-auto" src="img/team/TempL.jpg" alt="">
+                                <p>I’m an undergrad at Arizona State University majoring in Computer Science. My main interests are game, mobile and web development. I am the lead for the back-end development of this project. As a beginner in relational database systems and SQL as a whole, I am hoping to expand my knowledge significantly through Loot Plus.</p>
+                                <ul class="list-inline">
+                                    <li>Date Joined: August 30th, 2018</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                                    <i class="fa fa-times"></i>
+                                    Close Article</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+
 </body>
+
 </html>

@@ -3,9 +3,8 @@ body {
 }
 
 
-.split {
-    margin: 20px;
-}
+.split{
+    margin: 20px;}
 
 .DaGame {
     border: 1px solid black;
@@ -17,43 +16,33 @@ body {
 }
 
 .logo {
-    background-image: url(/logo-white.png);
-    background-repeat: no-repeat;
-    background-position: relative;
-    height: 182px;
-    width: 455px;
+            background-image: url(/logo-white.png);
+            background-repeat: no-repeat;
+            background-position: relative;
+            height:182px;
+           width:455px;
     padding-bottom: 68px;
-    -webkit-animation-duration: 4s;
-    animation-duration: 4s;
-}
+            -webkit-animation-duration: 4s;
+            animation-duration: 4s;
+         }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
+   0% {opacity: 0;}
+    100% {opacity: 1;}
+} 
 
 /* Standard syntax */
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
+ 0% {opacity: 0;}
+    100% {opacity: 1;}
+} 
+    
 
 .fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-}
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+         }
 
 .buttonHome {
     position: relative;
@@ -64,8 +53,7 @@ body {
     padding: 5px;
     width: 120px;
     text-align: center;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
+    -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
@@ -101,8 +89,7 @@ body {
     padding: 5px;
     width: 120px;
     text-align: center;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
+    -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
@@ -129,19 +116,88 @@ body {
     transition: 0s
 }
 
-
-
-.buttonMesBoar {
+.buttonTeam{
     position: relative;
-    background-color: #e52b3f;
+     background-color: #E8B024;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
     width: 120px;
     text-align: center;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonTeam:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonTeam:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonNews {
+    position: relative;
+   background-color: #E52B3F;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonNews:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonNews:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonMesBoar {
+    position: relative;
+     background-color: #4770b7;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
@@ -168,18 +224,52 @@ body {
     transition: 0s
 }
 
-
-.buttonGame {
+.buttonSwag {
     position: relative;
-    background-color: #4770B7;
+     background-color: #52b270;
     border: none;
     font-size: 14px;
     color: #E2E2E2;
     padding: 5px;
     width: 120px;
     text-align: center;
-    -webkit-transition-duration: 0.4s;
-    /* Safari */
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonSwag:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonSwag:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonGame{
+    position: relative;
+     background-color: #4770B7;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     text-decoration: none;
     overflow: hidden;
