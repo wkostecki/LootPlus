@@ -39,8 +39,6 @@
     <script type="text/javascript" src="./scripts/marketer.js"></script>
     <script type="text/javascript" src="./scripts/eldergod.js"></script>
 
-    <!--adventures-->
-    <script type="text/javascript" src="./scripts/adventure.js"></script>
 
 </head>
 
@@ -92,14 +90,19 @@
         <div id="adventureAvailable" style="visibility:hidden">
             <p>Go on an adventure? Cost: 1 uber rare.</p>
             <select id="adventureoptions">
-                <option value="Boring">Boring</option>
             </select>
             <button class="home_button" id="adventurebutton" onclick="adventureStart();" style="visibility:show">Go</button>
             <p>How to play:
                 WASD to move.<br>
-                1-6 to fire projectiles at enemies (differently colored based on difficulty). Projectiles fire towards
-                your cursor.<br>
-                Killing enemies and reaching the end reward loot based on difficulty.<br>
+                1-6 to fire projectiles at enemies (color-coded with increasing damage based on difficulty). Projectiles fire towards your cursor.<br>
+                1 - Free. Weak damage.<br>
+                2 - Costs 1000 commons to fire. Slightly better damage. <br>
+                3 - Costs 1000 uncommons to fire. Still slightly better damage.<br>
+                4 - Costs 1000 rares to fire. Noticing a trend here? Try to guess whether or not it's better than 3.<br>
+                5 - Costs 1000 super rares to fire and one-shots enemies. Guess what comes next?<br>
+                6 - Costs 1000 ultra rares to fire. Surprised you with that one, didn't I? Don't shoot this one, though. It heals enemies.<br>
+                Kill enemies and reach the end (the blue box) without dying for a reward.<br>
+                
                 Get to the blue box to win.
             </p>
         </div>
@@ -107,5 +110,6 @@
 
     <div class="home_button" id="adventure_canvas"></div>
 </body>
-
+    <!--adventures-->
+    <script type="text/javascript" src="./scripts/adventure.js"></script>
 </html>
