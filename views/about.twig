@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="Site.css">
+    <title>About</title>
+</head>
+<body>
+<div id = "mainlogo" class = "logo fadeIn"></div>
+
+    <span><a href="./"><button class="buttonHome">Home</button></a></span>
+    <span><a href="./game"><button class="buttonGame">Game</button></a></span>
+    <span><a href="./about"><button class="buttonAbout">About</button></a></span>
+    <span><a href="./news"><button class="buttonNews">News</button></a></span>
+    <span><a href="./team"><button class="buttonTeam">Team</button></a></span>
+    <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
+    <span><a href="./swag"><button class="buttonSwag">Swag</button></a></span>
+<div id = "block" class = "split"></div>
+<hr style="border: 2px solid#e8b024;" />  
+<div id = "block" class = "split"></div>
+{% if not user %}
+    <a href="/login">Log In</a>
+    <a href="/register">Register</a>
+{% else %}  
+    <a href="/logout">Log out</a>
+{% endif %}  
+    
+</body>
+</html>
