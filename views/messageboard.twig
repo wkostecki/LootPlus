@@ -1,44 +1,45 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="Site.css">    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="Site.css">
     <title>Message Boards</title>
 </head>
+
 <body>
-<div id = "mainlogo" class = "logo fadeIn"></div>
+    <div id="mainlogo" class="logo fadeIn"></div>
 
     <span><a href="./"><button class="buttonHome">Home</button></a></span>
     <span><a href="./game"><button class="buttonGame">Game</button></a></span>
     <span><a href="./about"><button class="buttonAbout">About</button></a></span>
-    <span><a href="./news"><button class="buttonNews">News</button></a></span>
-    <span><a href="./team"><button class="buttonTeam">Team</button></a></span>
     <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
-    <span><a href="./swag"><button class="buttonSwag">Swag</button></a></span>
-<div id = "block" class = "split"></div>
-<hr style="border: 2px solid#4770b7;" />  
-<div id = "block" class = "split"></div>  
-{% if not user %}
+    <div id="block" class="split"></div>
+    <hr style="border: 2px solid#4770b7;" />
+    <div id="block" class="split"></div>
+    {% if not user %}
     <a href="/login">Log In</a>
     <a href="/register">Register</a>
-{% else %}  
+    {% else %}
     <a href="/logout">Log out</a>
-{% endif %}   
-{% for post in posts %}
+    {% endif %}
+    {% for post in posts %}
     <div>
         <p>{{post.username}}: {{post.content}}</p>
         <form method="POST" action='/like/{{post.id}}'>
             <input type="submit" value-"Like">
         </form>
     </div>
-{% endfor %}
+    {% endfor %}
 
-{% if user %}
-    <form method="POST" action="/post"> 
+    {% if user %}
+    <form method="POST" action="/post">
         <input type="text" name="message" placeholder="Message" />
         <input type="submit" value="Submit">
     </form>
-{% endif %}
-    
+    {% endif %}
+
 </body>
+
 </html>
