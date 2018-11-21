@@ -2,10 +2,10 @@ var eldergod = {
 
     cost: 100,
     purchaseType: "ultra rare",
-    lbps: 200,
+    lbps: 500,
     totalOwned: 0,
     initialCost: 100,
-    costIncPer: 1.18,
+    costIncPer: 1.15,
 
     onload: function () {
         this.totalOwned = 0;

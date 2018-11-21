@@ -4,8 +4,8 @@ var business = {
     purchaseType: "junk",
     lbps: 1,
     totalOwned: 0,
-    initialCost: 100,
-    costIncPer: 1.18,
+    initialCost: 15,
+    costIncPer: 1.45,
 
     onload: function () {
         this.totalOwned = 0;

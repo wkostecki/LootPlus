@@ -2,10 +2,10 @@ var pirate = {
 
     cost: 100,
     purchaseType: "common",
-    lbps: 2,
+    lbps: 3,
     totalOwned: 0,
-    initialCost: 100,
-    costIncPer: 1.18,
+    initialCost: 43,
+    costIncPer: 1.29,
 
     onload: function () {
         this.totalOwned = 0;
