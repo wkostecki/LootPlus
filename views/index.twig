@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="Site.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Rozha+One" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+
+</head>
+
+<body>
+    <div id="mainlogo" class="logo fadeIn"></div>
+    <span><a href="./"><button class="buttonHome">Home</button></a></span>
+    <span><a href="./game"><button class="buttonGame">Game</button></a></span>
+    <span><a href="./about"><button class="buttonAbout">About</button></a></span>
+    <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
+    <div id="block" class="split"></div>
+    <hr style="border: 2px solid#52b270;" />
+    <div id="block" class="split"></div>
+    {% if not user %}
+    {% if typeForm == "login" or not typeForm %}
+    <form method="POST" action="/login">
+        <h5 style="color: red">{{ loginError }}</h5>
+        <input type="text" placeholder="username" name="username" /><br>
+        <input type="password" placeholder="password" name="password" /><br>
+        <input type="submit" value="login" />
+    </form>
+    <a href="/register">Register</a>
+    {% endif %}
+    {% if typeForm == "register" %}
+    <form method="POST" action="/register">
+        <h5 style="color: red">{{ registerError }}</h5>
+        <input type="email" placeholder="email" name="email" /><br>
+        <input type="text" placeholder="username" name="username" /><br>
+        <input type="password" placeholder="password" name="password" /><br>
+        <input type="submit" value="register" />
+    </form>
+    {% endif %}
+    {% else %}
+    <a href="/logout">Log out</a>
+    {% endif %}
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 style="color:#52b270;" class="section-heading text-uppercase">Latest Updates</h2>
+                    <h3 class="section-subheading text-muted">Loot Plus: The Game</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/tempimg.png" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 style="color:#4770b7;">11/21/18</h4>
+                                    <h5 class="subheading" style="color:#e8b024;">Game Beta and Website Enhancement </h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">The beta for Loot Plus has been uploaded, adding additional levels of collectable loot and a new adventure mode. Updated CSS to make the website sparkle.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/tempimg.png" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 style="color:#4770b7;">11/15/18</h4>
+                                    <h5 class="subheading" style="color:#e8b024;">Backend Live</h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">The servers for Loot Plus go live, </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/tempimg.png" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 style="color:#4770b7;">10/23/18</h4>
+                                    <h5 class="subheading" style="color:#e8b024;">Website visual overhall</h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Website visual overhall in order to make the website more appealing to visit</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/tempimg.png" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 style="color:#4770b7;">9/14/18</h4>
+                                    <h5 class="subheading" style="color:#e8b024;">Alpha build complete</h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">The alpha build of Loot Plus goes live. Allows for the first 3 levels of collecting loot.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/tempimg.png" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 style="color:#4770b7;">8/18/18</h4>
+                                    <h5 class="subheading" style="color:#e8b024;">Loot Plus Breaks Ground</h5>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Work on the innovative Loot Plus clicker game begins as Group 11 forms to change the world.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+
+</body>
+
+</html>

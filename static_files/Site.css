@@ -1,0 +1,207 @@
+body {
+    background-color: #1A181A;
+}
+
+
+.split {
+    margin: 20px;
+}
+
+.DaGame {
+    border: 1px solid black;
+    background-color: #e2e2e2;
+    padding-top: 2px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
+.logo {
+    background-image: url(/logo-white.png);
+    background-repeat: no-repeat;
+    background-position: relative;
+    height: 182px;
+    width: 455px;
+    padding-bottom: 68px;
+    -webkit-animation-duration: 4s;
+    animation-duration: 4s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Standard syntax */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+.buttonHome {
+    position: relative;
+    background-color: #52b270;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonHome:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonHome:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.buttonAbout {
+    position: relative;
+    background-color: #e8b024;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonAbout:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonAbout:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+
+
+.buttonMesBoar {
+    position: relative;
+    background-color: #e52b3f;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonMesBoar:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonMesBoar:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+
+.buttonGame {
+    position: relative;
+    background-color: #4770B7;
+    border: none;
+    font-size: 14px;
+    color: #E2E2E2;
+    padding: 5px;
+    width: 120px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.buttonGame:after {
+    content: "";
+    background: #1A181A;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.buttonGame:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}

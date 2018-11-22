@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />  
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/agency.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="Site.css">  
+    <title>Message Boards</title>
+</head>
+<body>
+<div id = "mainlogo" class = "logo fadeIn"></div>
+
+    <span><a href="./"><button class="buttonHome">Home</button></a></span>
+    <span><a href="./game"><button class="buttonGame">Game</button></a></span>
+    <span><a href="./about"><button class="buttonAbout">About</button></a></span>
+    <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
+<div id = "block" class = "split"></div>
+<hr style="border: 2px solid#4770b7;" />  
+<div id = "block" class = "split"></div>  
+{% if not user %}
+    <a href="/login">Log In</a>
+    <a href="/register">Register</a>
+{% else %}  
+    <a href="/logout">Log out</a>
+{% endif %}   
+{% for post in posts %}
+    <div style="color: #fafafa;">
+        <p style="color: #fafafa;">{{post.username}}: {{post.content}}</p>
+        {% if user %}
+        <form method="POST" action='/like/{{post.id}}'>
+            <input type="submit" value="Like">
+        </form>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% if user %}
+    <form method="POST" action="/post"> 
+        <input type="text" name="message" placeholder="Message" />
+        <input type="submit" value="Submit">
+    </form>
+{% endif %}
+    
+</body>
+</html>
