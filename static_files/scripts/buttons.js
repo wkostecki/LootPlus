@@ -137,9 +137,9 @@ var buttons = {
 
         //marketer
         name = "marketer";
-        htmlInteraction.setInnerHtml(name, "Hail Satan (" + marketer.cost + " " + marketer.purchaseType + "s)");
+        htmlInteraction.setInnerHtml(name, "Hire a Marketer (" + marketer.cost + " " + marketer.purchaseType + "s)");
         htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-        marketer.totalOwned + " marketers using the Infernal Lord to trick people into giving you " + 
+        marketer.totalOwned + " marketers tricking people into giving you " + 
         (marketer.totalOwned * marketer.lbps) + 
         " lootboxes per second");
         if (marketer.totalOwned > 0)

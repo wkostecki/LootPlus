@@ -160,32 +160,32 @@ class Adventure {
             this.player.position.y += this.playerMoveSpeed;
 
         if (keyDown('1') && lootbox.junk >= this.cost1 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 5);
+            this.playerShoot(this.player, 5, color(100, 100, 100));
             lootbox.junk -= this.cost1;
             this.cooldown = 0;
         }
         else if (keyDown('2') && lootbox.common >= this.cost2 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 10);
+            this.playerShoot(this.player, 10, color(0, 0, 0));
             lootbox.common -= this.cost2;
             this.cooldown = 0;
         }
         else if (keyDown('3') && lootbox.uncommon >= this.cost3 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 25);
+            this.playerShoot(this.player, 25, color(82, 178, 112));
             lootbox.uncommon -= this.cost3;
             this.cooldown = 0;
         }
         else if (keyDown('4') && lootbox.rare >= this.cost4 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 50);
+            this.playerShoot(this.player, 50, color(71, 112, 183));
             lootbox.rare -= this.cost4;
             this.cooldown = 0;
         }
         else if (keyDown('5') && lootbox.superRare >= this.cost5 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, 100);
+            this.playerShoot(this.player, 100, color(229, 43, 63));
             lootbox.superRare -= this.cost5;
             this.cooldown = 0;
         }
         else if (keyDown('6') && lootbox.ultraRare >= this.cost6 && this.cooldown > this.cooldownTime) {
-            this.playerShoot(this.player, -10);
+            this.playerShoot(this.player, -10, color(76, 19, 157));
             lootbox.ultraRare -= this.cost6;
             this.cooldown = 0;
         }
@@ -257,12 +257,12 @@ class Adventure {
         this.end.remove();
     }
 
-    playerShoot(source, damage) {
+    playerShoot(source, damage, col) {
         var projectile = createSprite(source.position.x, source.position.y, 10, 10);
 
         var a = atan2(mouseY - source.position.y, mouseX - source.position.x);
         projectile.setSpeed(this.playerMoveSpeed * 2, degrees(a));
-        projectile.shapeColor = color(0);
+        projectile.shapeColor = col;
         projectile.life = 100;
         this.playerProjectiles.add(projectile);
         this.playerProjectilesDmg.push(damage);
