@@ -1,5 +1,7 @@
 var main = {
 
+
+
     // Functions
     onload: function () {
         // Prevents some stupid refresh bugs of the browser
@@ -12,6 +14,10 @@ var main = {
         farm.onload();
         marketer.onload();
         eldergod.onload();
+
+        if (gameLoad.innerHTML != "") {
+            lootbox.load(gameLoad.innerHTML); 
+        }
 
         // First actions
         window.setInterval(this.secInterval.bind(this), 1000);

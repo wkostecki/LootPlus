@@ -110,6 +110,12 @@
 
 
     <div class="home_button" id="adventure_canvas"></div>
+    {% if user.loadSave == "nosave" %}
+        <div style="visibility: hidden;" id="gameLoad"></div>
+    {% else %}
+        <div style="visibility: hidden;" id="gameLoad">{{ user.loadSave }}</div>
+        <script>lootbox.load("{{ user.loadSave }}")</script>
+    {% endif %}
 </body>
 
 </html>

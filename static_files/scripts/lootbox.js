@@ -157,6 +157,113 @@ var lootbox = {
         if (this.totalUberRare > 0)
             if (this.totalUberRare != 1) htmlInteraction.setInnerHtml("uberRareCount", "You have " + this.uberRare + " uber rares.");
             else htmlInteraction.setInnerHtml("uberRareCount", "You have 1 uber rare.");
+    },
+
+    save: function () {
+        var string = "";
+
+        //lootboxes info
+        string += this.boxesOwned + "a"
+            + this.junk + "b" + this.common + "c"
+            + this.uncommon + "d" + this.rare + "e"
+            + this.superRare + "f" + this.ultraRare + "g"
+            + this.uberRare + "h";
+
+        //buildings
+        string += business.totalOwned + "i" + pirate.totalOwned + "j"
+            + cow.totalOwned + "k" + farm.totalOwned + "l"
+            + marketer.totalOwned + "m" + eldergod.totalOwned + "n";
+
+        //adventure
+        string += adventuresTaken + "o";
+
+        console.log(string);
+
+    },
+
+    load: function (string) {
+        //parse lootbox
+        var values = string.split("a")
+        this.boxesOwned = Number(values[0]);
+        console.log("loaded lootbox of " + this.boxesOwned);
+
+        //parse junk
+        values = values[1].split("b");
+        this.junk = Number(values[0]);
+        console.log("loaded junk of " + this.junk);
+
+        //parse common
+        values = values[1].split("c");
+        this.common = Number(values[0]);
+        console.log("loaded common of " + this.common);
+
+        //parse uncommon
+        values = values[1].split("d");
+        this.uncommon = Number(values[0]);
+        console.log("loaded uncommon of " + this.uncommon);
+
+        //parse rare
+        values = values[1].split("e");
+        this.rare = Number(values[0]);
+        console.log("loaded rare of " + this.rare);
+
+        //parse super rare
+        values = values[1].split("f");
+        this.superRare = Number(values[0]);
+        console.log("loaded superrare of " + this.superRare);
+
+        //parse ultra rare
+        values = values[1].split("g");
+        this.ultraRare = Number(values[0]);
+        console.log("loaded ultra rare of " + this.ultraRare);
+
+        //parse uber rare
+        values = values[1].split("h");
+        this.uberRare = Number(values[0]);
+        console.log("loaded uber rare of " + this.uberRare);
+
+        //bus pir cow far mar god
+        //parse business
+        values = values[1].split("i");
+        business.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (business.lbps * business.totalOwned);
+        console.log("loaded business of " + business.totalOwned + " new lbps " + this.boxesPerSecond);
+
+        //parse pirate
+        values = values[1].split("j");
+        pirate.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (pirate.lbps * pirate.totalOwned);
+        console.log("loaded pirate of " + pirate.totalOwned + " new lbps " + this.boxesPerSecond);
+//parse cow
+        values = values[1].split("k");
+        cow.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (cow.lbps * cow.totalOwned);
+        console.log("loaded cow of " + cow.totalOwned + " new lbps " + this.boxesPerSecond);
+
+        //parse farm
+        values = values[1].split("l");
+        farm.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (farm.lbps * farm.totalOwned);
+        console.log("loaded farm of " + farm.totalOwned + " new lbps " + this.boxesPerSecond);
+
+        //parse marketer
+        values = values[1].split("m");
+        marketer.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (marketer.lbps * marketer.totalOwned);
+        console.log("loaded marketer of " + marketer.totalOwned + " new lbps " + this.boxesPerSecond);
+
+        //parse eldergod
+        values = values[1].split("n");
+        eldergod.totalOwned = Number(values[0]);
+        this.boxesPerSecond = this.boxesPerSecond + (eldergod.lbps * eldergod.totalOwned);
+        console.log("loaded eldergod of " + eldergod.totalOwned + " new lbps " + this.boxesPerSecond);
+
+        values = values[1].split("o");
+        adventuresTaken = Number(values[0]);
+        setAdventuresTaken();
+        lootbox.open(0);
+
+        this.Increase(0); 
     }
   
 };
