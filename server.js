@@ -31,7 +31,7 @@ const authorize = async (req, res, next) => {
         next();
         return;
     };
-    const user = await db.get('SELECT users.username, users.banStatus, users.id as id, users.loadSave FROM sessions LEFT JOIN users ON sessions.userid = users.id WHERE sessionToken=?', sessionToken);
+    const user = await db.get('SELECT users.username, users.banStatus, users.id as id FROM sessions LEFT JOIN users ON sessions.userid = users.id WHERE sessionToken=?', sessionToken);
     if(!user) {
         next();
         return;
@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
 
 app.get('/game', (req, res) => {
     const user = req.user;
-    res.render('game', { user }); 
+    res.render('game', { user });  
 });
 
 app.get('/about', (req, res) => { 
