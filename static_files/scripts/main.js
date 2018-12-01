@@ -12,7 +12,7 @@ var main = {
         farm.onload();
         marketer.onload();
         eldergod.onload();
-
+        
         // First actions
         window.setInterval(this.secInterval.bind(this), 1000);
         window.setInterval(this.autoOpen.bind(this), 100);
