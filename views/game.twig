@@ -53,6 +53,9 @@
         <a href="/logout">Log out</a>
     {% endif %}
     <div id="Blam" class="DaGame">
+    {% if user %}
+        <button id="saveGameButton" onclick="main.server();">Save Game</button>
+    {% endif %} 
         <span id="lbps"></span><br />
         <span id="lootboxCount"></span><br />
         <span id="junkCount"></span><br />
@@ -114,7 +117,6 @@
         <div style="visibility: hidden;" id="gameLoad"></div>
     {% else %}
         <div style="visibility: hidden;" id="gameLoad">{{ user.loadSave }}</div>
-        <script>lootbox.load("{{ user.loadSave }}")</script>
     {% endif %}
 </body>
 

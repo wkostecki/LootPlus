@@ -169,15 +169,19 @@ var lootbox = {
             + this.superRare + "f" + this.ultraRare + "g"
             + this.uberRare + "h";
 
+        string += this.totalJunk + "i" + this.totalCommon + "j"
+            + this.totalUncommon + "k" + this.totalUncommon + "l"
+            + this.totalRare + "m" + this.totalSuperRare + "n"
+            + this.totalUltraRare + "o" + this.totalUberRare + "p";
         //buildings
-        string += business.totalOwned + "i" + pirate.totalOwned + "j"
-            + cow.totalOwned + "k" + farm.totalOwned + "l"
-            + marketer.totalOwned + "m" + eldergod.totalOwned + "n";
+        string += business.totalOwned + "q" + pirate.totalOwned + "r"
+            + cow.totalOwned + "s" + farm.totalOwned + "t"
+            + marketer.totalOwned + "u" + eldergod.totalOwned + "v";
 
         //adventure
         string += adventuresTaken + "o";
 
-        console.log(string);
+        return string;
 
     },
 
@@ -201,8 +205,7 @@ var lootbox = {
         values = values[1].split("d");
         this.uncommon = Number(values[0]);
         console.log("loaded uncommon of " + this.uncommon);
-
-        //parse rare
+//parse rare
         values = values[1].split("e");
         this.rare = Number(values[0]);
         console.log("loaded rare of " + this.rare);
@@ -222,43 +225,75 @@ var lootbox = {
         this.uberRare = Number(values[0]);
         console.log("loaded uber rare of " + this.uberRare);
 
-        //bus pir cow far mar god
+         //parse total junk
+         values = values[1].split("i");
+         this.totalJunk = Number(values[0]);
+         console.log("loaded total junk of " + this.totalJunk);
+
+         //parse total common
+         values = values[1].split("j");
+         this.totalCommon = Number(values[0]);
+         console.log("loaded total common of " + this.totalCommon);
+//parse total uncommon
+         values = values[1].split("k");
+         this.totalUncommon = Number(values[0]);
+         console.log("loaded total uncommon of " + this.totalUncommon);
+
+         //parse total rare
+         values = values[1].split("l");
+         this.totalRare = Number(values[0]);
+         console.log("loaded total rare of " + this.totalRare);
+
+         //parse total super rare
+         values = values[1].split("m");
+         this.superRare = Number(values[0]);
+         console.log("loaded total superrare of " + this.superRare);
+
+         //parse total ultra rare
+         values = values[1].split("n");
+         this.totalUltraRare = Number(values[0]);
+         console.log("loaded total ultra rare of " + this.totalUltraRare);
+
+         //parse total common
+         values = values[1].split("o");
+         this.totalUberRare = Number(values[0]);
+         console.log("loaded total uber rare of " + this.totalUberRare);
+//bus pir cow far mar god
         //parse business
-        values = values[1].split("i");
+        values = values[1].split("p");
         business.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (business.lbps * business.totalOwned);
         console.log("loaded business of " + business.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse pirate
-        values = values[1].split("j");
+        values = values[1].split("q");
         pirate.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (pirate.lbps * pirate.totalOwned);
         console.log("loaded pirate of " + pirate.totalOwned + " new lbps " + this.boxesPerSecond);
 //parse cow
-        values = values[1].split("k");
+        values = values[1].split("r");
         cow.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (cow.lbps * cow.totalOwned);
         console.log("loaded cow of " + cow.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse farm
-        values = values[1].split("l");
+        values = values[1].split("s");
         farm.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (farm.lbps * farm.totalOwned);
         console.log("loaded farm of " + farm.totalOwned + " new lbps " + this.boxesPerSecond);
-
-        //parse marketer
-        values = values[1].split("m");
+//parse marketer
+        values = values[1].split("t");
         marketer.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (marketer.lbps * marketer.totalOwned);
         console.log("loaded marketer of " + marketer.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse eldergod
-        values = values[1].split("n");
+        values = values[1].split("u");
         eldergod.totalOwned = Number(values[0]);
         this.boxesPerSecond = this.boxesPerSecond + (eldergod.lbps * eldergod.totalOwned);
         console.log("loaded eldergod of " + eldergod.totalOwned + " new lbps " + this.boxesPerSecond);
 
-        values = values[1].split("o");
+        values = values[1].split("v");
         adventuresTaken = Number(values[0]);
         setAdventuresTaken();
         lootbox.open(0);

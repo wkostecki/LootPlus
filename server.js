@@ -5,10 +5,29 @@ const sqlite = require('sqlite');
 const bcrypt = require('bcrypt');
 const uuidv4 = require('uuid/v4');
 const cookieParser = require('cookie-parser'); 
-const uniqid = require('uniqid'); 
+const uniqid = require('uniqid');
+const lootboxFile = require('./static_files/scripts/lootbox.js');  
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'twig');
+// Add headers
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 app.use(express.static(__dirname + '/static_files'));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -74,7 +93,7 @@ app.get('/', (req, res) => {
 app.get('/game', (req, res) => {
     const user = req.user;
     res.render('game', { user });
-    console.log(user);    
+    console.log("Game Page Accessed");  
 });
 
 app.get('/about', (req, res) => { 
@@ -165,13 +184,7 @@ app.post('/login', async (req, res) => {
 
     if (passwordMatches) {
         const sessionToken = uuidv4();
-        const uniqueSessionID = await uniqid();
-        // const sessionExists = db.get('SELECT * FROM sessions WHERE userid=?', user.id); 
-        // if (sessionExists)
-        // {
-        //     res.redirect('/');  
-        //     return; 
-        // } 
+        const uniqueSessionID = await uniqid(); 
         await db.run('INSERT INTO sessions (id, userid, sessionToken) VALUES (?, ?, ?);', uniqueSessionID, user.id, sessionToken);  
         res.cookie('sessionToken', sessionToken);
         console.log("\nSigned In\n"); 
@@ -180,7 +193,23 @@ app.post('/login', async (req, res) => {
         //console.log("\nincorrect password\n");
         res.render('index', { loginError: 'Wrong Username and Password', typeForm: 'login'});   
     }
-});
+}); 
+
+app.get('/game/:saveString', async (req, res) => {
+    const db = await dbPromise; 
+    const saveString = req.params.saveString;
+    const user = req.user; 
+    console.log("User " + user); 
+    console.log("Save String " + saveString);
+    if (user) {
+        await db.run('UPDATE users SET loadSave=? WHERE id=?', saveString, user.id);
+    }
+    else
+    {
+        console.log("User Not Logged In"); 
+    }
+    res.render('game');  
+}); 
 
 app.get('/logout', async (req, res) => {
     const db = await dbPromise;
