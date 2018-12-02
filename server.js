@@ -226,10 +226,11 @@ app.get('/game/:saveString', requireAuth, async (req, res) => {
     const db = await dbPromise; 
     const saveString = req.params.saveString;
     const user = req.user; 
-    console.log("User " + user); 
+    console.log("User ID: " + user.id); 
     console.log("Save String " + saveString);
     if (user) {
-        await db.run('UPDATE users SET loadSave=? WHERE id=?', saveString, user.id);
+        console.log("Accessing Database"); 
+        await db.run('UPDATE users SET loadSave=? WHERE id=?', saveString, user.id).then(console.log("Complete:"));
     }
     else
     {

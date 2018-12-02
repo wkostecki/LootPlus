@@ -21,5 +21,9 @@ var pirate = {
         }
         buttons.checkPurchaseableBuildings();
     },
+    setTotal: function (amount) {
+        this.totalOwned = amount;
+        this.cost = Math.floor(this.initialCost * (Math.pow(this.costIncPer, this.totalOwned)));
+    }
 
 };

@@ -187,7 +187,7 @@ var lootbox = {
 
     load: function (string) {
         //parse lootbox
-        var values = string.split("a")
+        var values = string.split("a"); 
         this.boxesOwned = Number(values[0]);
         console.log("loaded lootbox of " + this.boxesOwned);
 
@@ -259,37 +259,39 @@ var lootbox = {
         this.totalUberRare = Number(values[0]);
         console.log("loaded total uber rare of " + this.totalUberRare);
         //bus pir cow far mar god
+        
         //parse business
         values = values[1].split("q");
-        business.totalOwned = Number(values[0]);
+        business.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (business.lbps * business.totalOwned);
         console.log("loaded business of " + business.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse pirate
         values = values[1].split("r");
-        pirate.totalOwned = Number(values[0]);
+        pirate.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (pirate.lbps * pirate.totalOwned);
         console.log("loaded pirate of " + pirate.totalOwned + " new lbps " + this.boxesPerSecond);
         //parse cow
         values = values[1].split("s");
-        cow.totalOwned = Number(values[0]);
+        cow.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (cow.lbps * cow.totalOwned);
         console.log("loaded cow of " + cow.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse farm
         values = values[1].split("t");
-        farm.totalOwned = Number(values[0]);
+        farm.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (farm.lbps * farm.totalOwned);
         console.log("loaded farm of " + farm.totalOwned + " new lbps " + this.boxesPerSecond);
+
         //parse marketer
         values = values[1].split("u");
-        marketer.totalOwned = Number(values[0]);
+        marketer.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (marketer.lbps * marketer.totalOwned);
         console.log("loaded marketer of " + marketer.totalOwned + " new lbps " + this.boxesPerSecond);
 
         //parse eldergod
         values = values[1].split("v");
-        eldergod.totalOwned = Number(values[0]);
+        eldergod.setTotal(Number(values[0]));
         this.boxesPerSecond = this.boxesPerSecond + (eldergod.lbps * eldergod.totalOwned);
         console.log("loaded eldergod of " + eldergod.totalOwned + " new lbps " + this.boxesPerSecond);
 

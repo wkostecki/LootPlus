@@ -171,6 +171,6 @@ var buttons = {
         }
         else
             this.disableButton(name);
-    },
+    }
 
 };

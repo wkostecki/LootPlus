@@ -21,6 +21,6 @@ var building = {
             this.cost = this.initialCost * (Math.pow(this.costIncPer, this.totalOwned));
         }
         buttons.checkPurchaseableBuildings();
-    },
+    }
 
 };

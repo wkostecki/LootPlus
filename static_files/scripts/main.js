@@ -15,6 +15,10 @@ var main = {
         marketer.onload();
         eldergod.onload();
 
+        if (gameLoad.innerHTML != "") {
+            lootbox.load(gameLoad.innerHTML); 
+        }
+
         // First actions
         window.setInterval(this.secInterval.bind(this), 1000);
         window.setInterval(this.autoOpen.bind(this), 100);
@@ -41,14 +45,6 @@ var main = {
         setTimeout(function(){ htmlInteraction.setElementVisibility("autosaved", false); }, 2000);
 
     }
-
-    // server : function () {
-    //     xmlhttp = new XMLHttpRequest();
-    //     var string = lootbox.save();
-    //     xmlhttp.open("GET","localhost:3000/game" + string, true);
-    //     xmlhttp.send();
-    //}
-
 };
 
 window.onload = main.onload.bind(main);
