@@ -114,7 +114,7 @@ app.get('/team', (req, res) => {
 app.get('/messageboard', async (req, res) => { 
     const user = req.user;
     const db = await dbPromise;
-    const posts = await db.all('SELECT users.username, forum.id, forum.threadid, forum.likes, forum.content, forum.time FROM forum JOIN users ON forum.userid=users.id ORDER BY forum.time DESC;')
+    const posts = await db.all('SELECT users.username, forum.id, forum.likedBy, forum.likes, forum.content, forum.time FROM forum JOIN users ON forum.userid=users.id ORDER BY forum.time DESC;');
     res.render('messageboard', { user, posts });
 });
 
@@ -127,17 +127,7 @@ app.post('/post', requireAuth, async (req, res) => {
     const db = await dbPromise;
     const uniquePostID = await uniqid();
     var messageTime = Math.round((new Date()).getTime() / 1000); 
-    await db.run('INSERT INTO forum (id, userid, likes, content, time) VALUES (?, ?, ?, ?, ?)', uniquePostID, req.user.id, 0, req.body.message, messageTime);
-    res.redirect('/messageboard');
-});
-
-app.post('/like/:postid', requireAuth, async (req, res) => {
-    const db = await dbPromise;
-    const likedPostID = req.params.postid;
-    let postLikes = await db.all('SELECT likes FROM forum WHERE id=?', likedPostID);
-    //console.log(postLikes[0].likes); 
-    postLikes[0].likes += 1; 
-    await db.run('UPDATE forum SET likes=? WHERE id=?', postLikes[0].likes, likedPostID); 
+    await db.run('INSERT INTO forum (id, userid, likes, likedBy, content, time) VALUES (?, ?, ?, ?, ?, ?)', uniquePostID, req.user.id, 0, "nolikes", req.body.message, messageTime);
     res.redirect('/messageboard');
 });
 
@@ -195,7 +185,44 @@ app.post('/login', async (req, res) => {
     }
 }); 
 
-app.get('/game/:saveString', async (req, res) => {
+app.get('/like/:postid', requireAuth, async (req, res) => {
+    const db = await dbPromise;
+    const likedPostID = req.params.postid;
+    const user = req.user;
+    let post = await db.all('SELECT * FROM forum WHERE id=?', likedPostID);
+    console.log(post);
+    let likedBy = post[0].likedBy;
+    if (likedBy == "nolikes")
+    {            
+        post[0].likes += 1;
+        await db.run('UPDATE forum SET likes=? WHERE id=?', post[0].likes, likedPostID);
+        likedBy = user.id;
+        await db.run('UPDATE forum SET likedBy=? WHERE id=?', likedBy, likedPostID);
+    } 
+    else
+    {
+        var found = 0; 
+        var likedByArray = likedBy.split('|||');
+        for (var i = 0; i < likedByArray.length; i++)
+        {
+            if (user.id == likedByArray[i])
+            {
+                found = 1; 
+            }
+        }
+
+        if (found == 0)
+        {
+            post[0].likes += 1;
+            await db.run('UPDATE forum SET likes=? WHERE id=?', post[0].likes, likedPostID);
+            likedBy += "|||" + user.id;
+            await db.run('UPDATE forum SET likedBy=? WHERE id=?', likedBy, likedPostID);
+        }
+    } 
+    res.render('messageboard');
+});
+
+app.get('/game/:saveString', requireAuth, async (req, res) => {
     const db = await dbPromise; 
     const saveString = req.params.saveString;
     const user = req.user; 
@@ -229,12 +256,12 @@ app.get('/databasedump', async (req, res) => {
         users,
         forum,
         sessions
-    })
-})
+    }); 
+}); 
 
 app.use((req, res) => {
     res.status(404).send('file not found');
-})
+});
 
 app.listen(3000, () => {
     console.log('Server started at http://localhost:3000/');
