@@ -42,8 +42,7 @@ var buttons = {
     },
 
     checkAutoOpen: function () {
-        if (lootbox.boxesPerSecond >= 10)
-        {
+        if (lootbox.boxesPerSecond >= 10) {
             htmlInteraction.setElementVisibility("auto_open_checkbox", true);
             htmlInteraction.setElementVisibility("auto_open_checkbox_label", true);
 
@@ -60,19 +59,19 @@ var buttons = {
 
         var name = "business";
         //business
-        htmlInteraction.setInnerHtml(name, "Start a Business (" + 
+        htmlInteraction.setInnerHtml(name, "Start a Business (" +
             business.cost + " " + business.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-            business.totalOwned + " businesses earning " + 
-            (business.totalOwned * business.lbps) + 
+        htmlInteraction.setInnerHtml(name + "blurb", "You have " +
+            business.totalOwned + " businesses earning " +
+            (business.totalOwned * business.lbps) +
             " lootboxes per second");
         if (business.totalOwned > 0)
             htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.junk >= business.cost && !htmlInteraction.isElementVisible(name)) {
+        if (lootbox.totalJunk >= business.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.junk >= business.cost) {
+        if (lootbox.junk >= business.cost) {
             this.enableButton(name);
         }
         else
@@ -81,17 +80,17 @@ var buttons = {
         //pirate
         name = "pirate";
         htmlInteraction.setInnerHtml(name, "Hire a Pirate (" + pirate.cost + " " + pirate.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-        pirate.totalOwned + " pirates stealing " + 
-        (pirate.totalOwned * pirate.lbps) + 
-        " lootboxes per second");
-    if (pirate.totalOwned > 0)
-        htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.common >= pirate.cost && !htmlInteraction.isElementVisible(name)) {
+        htmlInteraction.setInnerHtml(name + "blurb", "You have " +
+            pirate.totalOwned + " pirates stealing " +
+            (pirate.totalOwned * pirate.lbps) +
+            " lootboxes per second");
+        if (pirate.totalOwned > 0)
+            htmlInteraction.setElementVisibility(name + "blurb", true);
+        if (lootbox.totalCommon >= pirate.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.common >= pirate.cost) {
+        if (lootbox.common >= pirate.cost) {
             this.enableButton(name);
         }
         else
@@ -100,17 +99,17 @@ var buttons = {
         //cows
         name = "cow";
         htmlInteraction.setInnerHtml(name, "Buy a Cow (" + cow.cost + " " + cow.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-        cow.totalOwned + " cows being milked for " + 
-        (cow.totalOwned * cow.lbps) + 
-        " lootboxes per second");
-    if (cow.totalOwned > 0)
-        htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.uncommon >= cow.cost && !htmlInteraction.isElementVisible(name)) {
+        htmlInteraction.setInnerHtml(name + "blurb", "You have " +
+            cow.totalOwned + " cows being milked for " +
+            (cow.totalOwned * cow.lbps) +
+            " lootboxes per second");
+        if (cow.totalOwned > 0)
+            htmlInteraction.setElementVisibility(name + "blurb", true);
+        if (lootbox.totalUncommon >= cow.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.uncommon >= cow.cost) {
+        if (lootbox.uncommon >= cow.cost) {
             this.enableButton(name);
         }
         else
@@ -119,17 +118,17 @@ var buttons = {
         //farm
         name = "farm";
         htmlInteraction.setInnerHtml(name, "Plant a Farm (" + farm.cost + " " + farm.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-        farm.totalOwned + " farms growing " + 
-        (farm.totalOwned * farm.lbps) + 
-        " lootboxes per second");
-    if (farm.totalOwned > 0)
-        htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.rare >= farm.cost && !htmlInteraction.isElementVisible(name)) {
+        htmlInteraction.setInnerHtml(name + "blurb", "You have " +
+            farm.totalOwned + " farms growing " +
+            (farm.totalOwned * farm.lbps) +
+            " lootboxes per second");
+        if (farm.totalOwned > 0)
+            htmlInteraction.setElementVisibility(name + "blurb", true);
+        if (lootbox.totalRare >= farm.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.rare >= farm.cost) {
+        if (lootbox.rare >= farm.cost) {
             this.enableButton(name);
         }
         else
@@ -137,18 +136,18 @@ var buttons = {
 
         //marketer
         name = "marketer";
-        htmlInteraction.setInnerHtml(name, "Hail Satan (" + marketer.cost + " " + marketer.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "You have " + 
-        marketer.totalOwned + " marketers using the Infernal Lord to trick people into giving you " + 
-        (marketer.totalOwned * marketer.lbps) + 
-        " lootboxes per second");
+        htmlInteraction.setInnerHtml(name, "Hire a Marketer (" + marketer.cost + " " + marketer.purchaseType + "s)");
+        htmlInteraction.setInnerHtml(name + "blurb", "You have " +
+            marketer.totalOwned + " marketers tricking people into giving you " +
+            (marketer.totalOwned * marketer.lbps) +
+            " lootboxes per second");
         if (marketer.totalOwned > 0)
             htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.superRare >= marketer.cost && !htmlInteraction.isElementVisible(name)) {
+        if (lootbox.totalSuperRare >= marketer.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.superRare >= marketer.cost) {
+        if (lootbox.superRare >= marketer.cost) {
             this.enableButton(name);
         }
         else
@@ -157,17 +156,17 @@ var buttons = {
         //cthulhu
         name = "eldergod";
         htmlInteraction.setInnerHtml(name, "Gaze into the Abyss (" + eldergod.cost + " " + eldergod.purchaseType + "s)");
-        htmlInteraction.setInnerHtml(name + "blurb", "Cthulhu has granted you dominion over " + 
-        eldergod.totalOwned + " unspeakable horrors that extract " + 
-        (eldergod.totalOwned * eldergod.lbps) + 
-        " lootboxes from their victims per second");
+        htmlInteraction.setInnerHtml(name + "blurb", "Cthulhu has granted you dominion over " +
+            eldergod.totalOwned + " unspeakable horrors that extract " +
+            (eldergod.totalOwned * eldergod.lbps) +
+            " lootboxes from their victims per second");
         if (eldergod.totalOwned > 0)
             htmlInteraction.setElementVisibility(name + "blurb", true);
-        if (lootbox.ultraRare >= eldergod.cost && !htmlInteraction.isElementVisible(name)) {
+        if (lootbox.totalUltraRare >= eldergod.cost && !htmlInteraction.isElementVisible(name)) {
             htmlInteraction.showButton(name);
             this.enableButton(name);
         }
-        else if (lootbox.ultraRare >= eldergod.cost) {
+        if (lootbox.ultraRare >= eldergod.cost) {
             this.enableButton(name);
         }
         else

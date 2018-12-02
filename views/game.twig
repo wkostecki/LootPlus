@@ -47,15 +47,19 @@
     <hr style="border: 2px solid#4770b7;" />
     <div id="block" class="split"></div>
     {% if not user %}
-        <a href="/login">Log In</a>
-        <a href="/register">Register</a>
-    {% else %}  
-        <a href="/logout">Log out</a>
+    <a href="/login">Log In</a>
+    <a href="/register">Register</a>
+    {% else %}
+    <a href="/logout">Log out</a>
     {% endif %}
     <div id="Blam" class="DaGame">
-    {% if user %}
-        <button id="saveGameButton" onclick="main.server();">Save Game</button>
-    {% endif %} 
+        {% if user %}
+        <button id="saveGameButton" onclick="main.server();">Save Game</button><span id="autosaved" style="visibility:hidden; color:green"> Saved</span>
+        <br/>
+        {% else %}
+            <div style="color:red">Your game will not be saved. Log in to be able to save game progress.</div>
+        {% endif %}
+
         <span id="lbps"></span><br />
         <span id="lootboxCount"></span><br />
         <span id="junkCount"></span><br />
@@ -68,7 +72,8 @@
 
         <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
         <form>
-            <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox" style="visibility:hidden">
+            <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox"
+                style="visibility:hidden">
             <label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
         </form>
         <br />
@@ -97,15 +102,17 @@
             <button class="home_button" id="adventurebutton" onclick="adventureStart();" style="visibility:show">Go</button>
             <p>How to play:
                 WASD to move.<br>
-                1-6 to fire projectiles at enemies (color-coded with increasing damage based on difficulty). Projectiles fire towards your cursor.<br>
+                1-6 to fire projectiles at enemies (color-coded with increasing damage based on difficulty).
+                Projectiles fire towards your cursor.<br>
                 1 - Free. Weak damage.<br>
                 2 - Costs 1000 commons to fire. Slightly better damage. <br>
                 3 - Costs 1000 uncommons to fire. Still slightly better damage.<br>
                 4 - Costs 1000 rares to fire. Noticing a trend here? Try to guess whether or not it's better than 3.<br>
                 5 - Costs 1000 super rares to fire and one-shots enemies. Guess what comes next?<br>
-                6 - Costs 1000 ultra rares to fire. Surprised you with that one, didn't I? Don't shoot this one, though. It heals enemies.<br>
+                6 - Costs 1000 ultra rares to fire. Surprised you with that one, didn't I? Don't shoot this one,
+                though. It heals enemies.<br>
                 Kill enemies and reach the end (the blue box) without dying for a reward.<br>
-                
+
                 Get to the blue box to win.
             </p>
         </div>
@@ -113,11 +120,6 @@
 
 
     <div class="home_button" id="adventure_canvas"></div>
-    {% if user.loadSave == "nosave" %}
-        <div style="visibility: hidden;" id="gameLoad"></div>
-    {% else %}
-        <div style="visibility: hidden;" id="gameLoad">{{ user.loadSave }}</div>
-    {% endif %}
 </body>
 
 </html>

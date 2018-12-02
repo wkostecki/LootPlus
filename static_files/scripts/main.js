@@ -1,6 +1,6 @@
 var main = {
 
-    
+
 
     // Functions
     onload: function () {
@@ -15,13 +15,11 @@ var main = {
         marketer.onload();
         eldergod.onload();
 
-        if (gameLoad.innerHTML != "") {
-            lootbox.load(gameLoad.innerHTML); 
-        }
-
         // First actions
         window.setInterval(this.secInterval.bind(this), 1000);
         window.setInterval(this.autoOpen.bind(this), 100);
+        if (document.getElementById("saveGameButton") != null)
+            window.setInterval(this.server.bind(this), 30000);
         //cookie.cookiehandler = window.setInterval(cookie.autoSave, 1000);
     },
 
@@ -33,12 +31,17 @@ var main = {
     autoOpen: function () {
         if (htmlInteraction.getElement("auto_open_checkbox").checked)
             lootbox.open(lootbox.boxesPerSecond / 9);
-    }, 
-    server : function () {
+    },
+    server: function () {
         var string = lootbox.save();
         var request = createCORSRequest("GET", "http://localhost:3000/game/" + string);
-        request.send();  
+        request.send();
+        console.log("saved");
+        htmlInteraction.setElementVisibility("autosaved", true);
+        setTimeout(function(){ htmlInteraction.setElementVisibility("autosaved", false); }, 2000);
+
     }
+
     // server : function () {
     //     xmlhttp = new XMLHttpRequest();
     //     var string = lootbox.save();
@@ -53,23 +56,23 @@ window.onload = main.onload.bind(main);
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr) {
-  
-      // Check if the XMLHttpRequest object has a "withCredentials" property.
-      // "withCredentials" only exists on XMLHTTPRequest2 objects.
-      xhr.open(method, url, true);
-  
+
+        // Check if the XMLHttpRequest object has a "withCredentials" property.
+        // "withCredentials" only exists on XMLHTTPRequest2 objects.
+        xhr.open(method, url, true);
+
     } else if (typeof XDomainRequest != "undefined") {
-  
-      // Otherwise, check if XDomainRequest.
-      // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-      xhr = new XDomainRequest();
-      xhr.open(method, url);
-  
+
+        // Otherwise, check if XDomainRequest.
+        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+
     } else {
-  
-      // Otherwise, CORS is not supported by the browser.
-      xhr = null;
-  
+
+        // Otherwise, CORS is not supported by the browser.
+        xhr = null;
+
     }
     return xhr;
 }
