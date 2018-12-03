@@ -55,48 +55,47 @@
     <div id="Blam" class="DaGame">
         {% if user %}
         <button id="saveGameButton" onclick="main.server();">Save Game</button><span id="autosaved" style="visibility:hidden; color:green"> Saved</span>
-        <br/>
+        <br />
         {% else %}
-            <div style="color:red">Your game will not be saved. Log in to be able to save game progress.</div>
+        <div style="color:red">Your game will not be saved. Log in to be able to save game progress.</div>
         {% endif %}
 
         <span id="lbps"></span><br />
         <span id="lootboxCount"></span><br />
-        <span id="junkCount"></span><br />
-        <span id="commonCount"></span><br />
-        <span id="uncommonCount"></span><br />
-        <span id="rareCount"></span><br />
-        <span id="superRareCount"></span><br />
-        <span id="ultraRareCount"></span><br />
-        <span id="uberRareCount"></span><br />
+        <span id="junkCount" style="color: rgb(100,100,100)"></span><br />
+        <span id="commonCount" style="color: rgb(0,0,0)"></span><br />
+        <span id="uncommonCount" style="color: rgb(82,178,112)"></span><br />
+        <span id="rareCount" style="color: rgb(71,112,183)"></span><br />
+        <span id="superRareCount" style="color: rgb(229,43,63)"></span><br />
+        <span id="ultraRareCount" style="color: rgb(76,19,157)"></span><br />
+        <span id="uberRareCount" style="color: rgb(255,128,0)"></span><br />
 
         <button class="home_button" id="open" onclick="lootbox.open(1);" style="visibility:hidden">Open a lootbox</button>
         <form>
-            <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox"
-                style="visibility:hidden">
+            <input class="home_button" type="checkbox" name="auto_open_checkbox" value="auto_open_checkbox" id="auto_open_checkbox" style="visibility:hidden">
             <label for="auto_open_checkbox" style="visibility:hidden" id="auto_open_checkbox_label">Auto Open</label>
         </form>
         <br />
         <br />
         <button class="home_button" id="business" onclick="business.buy();" style="visibility:hidden"></button>
-        <span id="businessblurb" style="visibility:hidden"></span>
+        <span id="businessblurb" style="visibility:hidden; color: rgb(100,100,100)"></span>
         <br />
         <button class="home_button" id="pirate" onclick="pirate.buy();" style="visibility:hidden"></button>
-        <span id="pirateblurb" style="visibility:hidden"></span>
+        <span id="pirateblurb" style="visibility:hidden; color: rgb(0,0,0)"></span>
         <br />
         <button class="home_button" id="cow" onclick="cow.buy();" style="visibility:hidden"></button>
-        <span id="cowblurb" style="visibility:hidden"></span>
+        <span id="cowblurb" style="visibility:hidden; color: rgb(82,178,112)"></span>
         <br />
         <button class="home_button" id="farm" onclick="farm.buy();" style="visibility:hidden"></button>
-        <span id="farmblurb" style="visibility:hidden"></span>
+        <span id="farmblurb" style="visibility:hidden; color: rgb(71,112,183)"></span>
         <br />
         <button class="home_button" id="marketer" onclick="marketer.buy();" style="visibility:hidden"></button>
-        <span id="marketerblurb" style="visibility:hidden"></span>
+        <span id="marketerblurb" style="visibility:hidden; color: rgb(229,43,63)"></span>
         <br />
         <button class="home_button" id="eldergod" onclick="eldergod.buy();" style="visibility:hidden"></button>
-        <span id="eldergodblurb" style="visibility:hidden"></span>
+        <span id="eldergodblurb" style="visibility:hidden; color: rgb(76,19,157)"></span>
         <div id="adventureAvailable" style="visibility:hidden">
-            <p>Go on an adventure? Cost: 1 uber rare.</p>
+            <p style="color: rgb(255,128,0)">Go on an adventure? Cost: 1 uber rare.</p>
             <select id="adventureoptions">
             </select>
             <button class="home_button" id="adventurebutton" onclick="adventureStart();" style="visibility:show">Go</button>
@@ -117,7 +116,7 @@
             </p>
         </div>
     </div>
-    
+
 
     <div class="home_button" id="adventure_canvas"></div>
     {% if user.loadSave == "nosave" %}
