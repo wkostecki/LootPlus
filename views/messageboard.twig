@@ -38,23 +38,23 @@
         <span style="color: #fafafa;">{{post.content}} </span>
         <p></p>
         <p></p>
-        <p id="{{ post.id }}" style="color: #fafafa;">
+        <span><p id="{{ post.id }}" style="color: #fafafa;">Likes: {{post.likes}}</p>
+        <img src="like.png" alt="like" style="width:24px;height:24px;"></span>
 
-            <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);" style="background-color: #4770b7; color:#fafafa ">Like</button> Likes:{{post.likes}}
-        </p> {% if user %}
-        <script>
-            console.log("Script Called");
-            var stringLikes = "{{post.likedBy}}";
-            var userLikes = "{{user.id}}";
-            if (stringLikes.includes(userLikes)) {
-                var postID = "{{post.id}}";
-                var likesButton = document.getElementsByName(postID);
-                likesButton[0].style.visibility = "hidden";
-            }
-
-        </script>
+        {% if user %}
+        <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);" style="background-color: #4770b7; color:#fafafa ">Like</button>
+            <script>
+                console.log("Script Called");
+                var stringLikes = "{{post.likedBy}}";
+                var userLikes = "{{user.id}}";  
+                if (stringLikes.includes(userLikes))
+                {
+                    var postID = "{{post.id}}"; 
+                    var likesButton = document.getElementsByName(postID);
+                    likesButton[0].style.visibility = "hidden";
+                }
+            </script>
         {% endif %}
-        <span> <img src="like.png" alt="like" style="width:24px;height:24px;"> {% if user %} </span>
     </div>
     {% endfor %}
 </body>

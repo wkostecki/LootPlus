@@ -34,11 +34,3 @@ function createCORSRequest(method, url) {
     }
     return xhr;
 }
-
-var setLikes = {
-  onload : function () {
-
-  }
-}
-
-window.onload = setLikes.onload.bind(likes);
