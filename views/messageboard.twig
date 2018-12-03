@@ -1,54 +1,57 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-    <meta charset="utf-8" />  
+    <meta charset="utf-8" />
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/agency.css" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="Site.css">
+    <link rel="stylesheet" type="text/css" href="Site.css">
     <script type="text/javascript" src="./scripts/likes.js"></script>
     <title>Message Boards</title>
 </head>
+
 <body>
-<div id = "mainlogo" class = "logo fadeIn"></div>
+    <div id="mainlogo" class="logo fadeIn"></div>
 
     <span><a href="./"><button class="buttonHome">Home</button></a></span>
     <span><a href="./game"><button class="buttonGame">Game</button></a></span>
     <span><a href="./about"><button class="buttonAbout">About</button></a></span>
     <span><a href="./messageboard"><button class="buttonMesBoar">Message Board</button></a></span>
-<div id = "block" class = "split"></div>
-<hr style="border: 2px solid#4770b7;" />  
-<div id = "block" class = "split"></div>  
-{% if not user %}
+    <div id="block" class="split"></div>
+    <hr style="border: 2px solid#e52b3f;" />
+    <div id="block" class="split"></div>
+    {% if not user %}
     <a href="/login">Log In</a>
     <a href="/register">Register</a>
-{% else %}  
+    {% else %}
     <a href="/logout">Log out</a>
-{% endif %}
-{% if user %}
-    <form method="POST" action="/post"> 
+    {% endif %}
+    {% if user %}
+    <form method="POST" action="/post">
         <input type="text" name="message" placeholder="Message" />
         <input type="submit" value="Submit">
     </form>
-{% endif %}   
-{% for post in posts %}
-    <div style="color: #fafafa;">
+    {% endif %}
+    {% for post in posts %}
+    <div style="color: #fafafa; background-color: #474748">
         <p style="color: #fafafa;">{{post.username}}: {{post.content}}</p>
         <p id="{{ post.id }}" style="color: #fafafa;">Likes: {{post.likes}}</p>
         {% if user %}
-            <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);">Like</button>
-            <script>
-                console.log("Script Called");
-                var stringLikes = "{{post.likedBy}}";
-                var userLikes = "{{user.id}}";  
-                if (stringLikes.includes(userLikes))
-                {
-                    var postID = "{{post.id}}"; 
-                    var likesButton = document.getElementsByName(postID);
-                    likesButton[0].style.visibility = "hidden";
-                }
-            </script>
+        <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);">Like</button>
+        <script>
+            console.log("Script Called");
+            var stringLikes = "{{post.likedBy}}";
+            var userLikes = "{{user.id}}";
+            if (stringLikes.includes(userLikes)) {
+                var postID = "{{post.id}}";
+                var likesButton = document.getElementsByName(postID);
+                likesButton[0].style.visibility = "hidden";
+            }
+
+        </script>
         {% endif %}
     </div>
-{% endfor %}  
+    {% endfor %}
 </body>
+
 </html>
