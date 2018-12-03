@@ -33,11 +33,15 @@
     </form>
     {% endif %}
     {% for post in posts %}
-    <div style="color: #fafafa; background-color: #474748">
-        <p style="color: #fafafa;">{{post.username}}: {{post.content}}</p>
-        <p id="{{ post.id }}" style="color: #fafafa;">Likes: {{post.likes}}</p>
-        {% if user %}
-        <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);">Like</button>
+    <div style="color: #fafafa; background-color: #474748; border-radius: 12px; border: 3px solid #e52b3f; position: relative; left: 60px; width: 50%;  padding: 20px; ">
+        <span style="color: #e8b024;">{{post.username}}: </span>
+        <span style="color: #fafafa;">{{post.content}} </span>
+        <p></p>
+        <p></p>
+        <p id="{{ post.id }}" style="color: #fafafa;">
+
+            <button class="likeButton" name="{{ post.id }}" onclick="likes.update(`{{ post.id }}`);" style="background-color: #4770b7; color:#fafafa ">Like</button> Likes:{{post.likes}}
+        </p> {% if user %}
         <script>
             console.log("Script Called");
             var stringLikes = "{{post.likedBy}}";
@@ -50,6 +54,7 @@
 
         </script>
         {% endif %}
+        <span> <img src="like.png" alt="like" style="width:24px;height:24px;"> {% if user %} </span>
     </div>
     {% endfor %}
 </body>
